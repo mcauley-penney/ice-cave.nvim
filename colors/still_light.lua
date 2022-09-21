@@ -2,12 +2,10 @@
     Author: MP
     Notes:
         hi groups: https://neovim.io/doc/user/syntax.html#highlight-groups
-        bg, set in term cfg: #1d1d1d
+        bg, set in term cfg: #292929
 
     TODO:
-      1. adjust type
-      2. add hop.nvim scheme
-      3. what can we learn from https://github.com/p00f/alabaster_dark.nvim
+      1. what can we learn from https://github.com/p00f/alabaster_dark.nvim
 ]]
 
 local na = {}
@@ -34,7 +32,7 @@ local blue = {
 }
 
 local red = {
-  [0] = "#B48EAD",
+  [0] = "#C3A4B3",
   [1] = "#e26d5c",
   [2] = "Red",
 }
@@ -45,7 +43,6 @@ local yellow = {
 
 -- highlight dictionaries
 local hl = {}
-local link = {}
 
 local function set_hl(hl_tbl)
   for group, opts in pairs(hl_tbl) do
@@ -57,14 +54,16 @@ end
 -- Hightlights
 --------------------------------------------------
 
--- Custom
+-- Custom --
 hl["__termdarken"] = { bg = gray[0] }
+hl["ParaFirstWord"] = { bold = true }
 hl["Success"] = { fg = green[0] }
 
--- UI
-hl["Cursor"] = { fg = red[2] }
+
+-- UI --
 hl["ColorColumn"] = na
 hl["Conceal"] = na
+hl["Cursor"] = { fg = red[2] }
 hl["CursorLine"] = { bg = gray[3], fg = yellow[0] }
 hl["CursorLineNr"] = { fg = gray[5] }
 hl["Directory"] = { fg = blue[2], italic = true }
@@ -75,9 +74,6 @@ hl["MsgArea"] = na
 hl["NonText"] = { fg = gray[3], italic = true }
 hl["Normal"] = { fg = gray[5], bg = gray[1] }
 hl["PmenuSel"] = { bg = blue[1] }
--- TODO:
--- hl["PmenuSbar"] = { link = "Comment" }
--- hl["PmenuThumb"] = { link = "Comment" }
 hl["Question"] = { fg = green[3] }
 hl["Search"] = { fg = red[2], bg = gray[3] }
 hl["SpecialComment"] = { fg = yellow[0], bold = true }
@@ -86,8 +82,31 @@ hl["StatusLine"] = { bg = gray[0] }
 hl["VertSplit"] = { fg = gray[2] }
 hl["Visual"] = { bg = gray[2] }
 hl["Yank"] = { fg = yellow[0], bg = gray[3] }
+hl["Delimiter"] = { link = "Special" }
+hl["EndOfBuffer"] = { link = "NonText" }
+hl["ErrorMsg"] = { link = "Error" }
+hl["FloatBorder"] = { link = "StatusLine" }
+hl["FoldColumn"] = { link = "ColorColumn" }
+hl["Folded"] = { link = "NonText" }
+hl["IncSearch"] = { link = "Search" }
+hl["Label"] = { link = "Keyword" }
+hl["LineNr"] = { link = "NonText" }
+hl["MoreMsg"] = { link = "ModeMsg" }
+hl["Pmenu"] = { link = "StatusLine" }
+hl["QuickFixLine"] = { link = "Search" }
+hl["SignColumn"] = { link = "StatusLineNC" }
+hl["SpecialChar"] = { link = "Special" }
+hl["StatusLineNC"] = { link = "__termbg" }
+hl["Substitute"] = { link = "CursorLine" }
+hl["TSNote"] = { link = "SpecialComment" }
+hl["TabLineFill"] = { link = "__termbg" }
+hl["Title"] = { link = "Directory" }
+hl["Todo"] = { link = "SpecialComment" }
+hl["WarningMsg"] = { link = "Error" }
+hl["Whitespace"] = { link = "NonText" }
 
--- Syntax
+
+-- Syntax --
 hl["Character"] = { fg = green[2] }
 hl["Comment"] = { fg = gray[4], italic = true }
 hl["Constant"] = { fg = red[0] }
@@ -102,6 +121,57 @@ hl["Statement"] = { fg = yellow[0] }
 hl["String"] = { fg = green[3] }
 hl["Tag"] = na
 hl["Type"] = { fg = blue[3] }
+hl["Boolean"] = { link = "Constant" }
+hl["Conditional"] = { link = "Statement" }
+hl["Define"] = { link = "PreProc" }
+hl["Exception"] = { link = "Statement" }
+hl["Float"] = { link = "Number" }
+hl["Include"] = { link = "PreProc" }
+hl["Macro"] = { link = "PreProc" }
+hl["Operator"] = { link = "Statement" }
+hl["PreCondit"] = { link = "PreProc" }
+hl["Repeat"] = { link = "Statement" }
+hl["StorageClass"] = { link = "Type" }
+hl["Structure"] = { link = "Type" }
+hl["Typedef"] = { link = "Type" }
+
+
+-- Filetype --
+-- Git
+-- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
+hl["gitcommitDiscardedType"] = { fg = red[1] }
+hl["gitcommitHeader"] = { bg = gray[0], italic = true }
+hl["gitcommitOnBranch"] = { bg = gray[0], italic = true }
+hl["gitcommitType"] = { fg = red[0], italic = true }
+hl["gitcommitArrow"] = { link = "Statement" }
+hl["gitcommitBlank"] = { link = "Success" }
+hl["gitcommitBranch"] = { link = "Success" }
+hl["gitcommitDiscarded"] = { link = "Success" }
+hl["gitcommitDiscardedFile"] = { link = "Success" }
+hl["gitcommitSummary"] = { link = "Directory" }
+hl["gitcommitUnmerged"] = { link = "Success" }
+
+-- Help
+-- https://github.com/vim/vim/blob/2d8ed0203aedd5f6c22efa99394a3677c17c7a7a/runtime/syntax/help.vim
+hl['helpCommand'] = { link = "Normal" }
+hl['helpExample'] = { link = "String" }
+hl['helpHyperTextEntry'] = { link = "Directory" }
+hl['helpOption'] = { link = "Normal" }
+hl['helpVim'] = { link = "Normal" }
+
+-- diff
+-- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
+hl["diffAdded"] = { fg = green[3] }
+hl["diffChanged"] = { fg = yellow[0] }
+hl["diffFile"] = { bg = gray[0], italic = true }
+hl["diffLine"] = { fg = blue[2], italic = true, underline = true }
+hl["diffNewFile"] = { bg = gray[0], underline = true }
+hl["diffRemoved"] = { fg = red[1] }
+hl["diffIndexLine"] = { link = "PreProc" }
+hl["diffNoEOL"] = { link = "DiagnosticError" }
+hl["diffOldFile"] = { link = "PreProc" }
+hl["diffSubname"] = { link = "Directory" }
+
 
 -- LSP --
 -- Diagnostics
@@ -118,202 +188,31 @@ end
 -- Handlers
 hl["LspSignatureActiveParameter"] = { fg = red[2], italic = true }
 
--- Treesitter
+
+-- Treesitter --
 hl["TSNamespace"] = { fg = blue[1] }
 hl["TSStringEscape"] = { fg = green[1] }
 hl["TSStringRegex"] = { fg = green[1] }
---[[
-    TSAnnotation = na,
-    TSAttribute = na,
-    TSConstBuiltin = na,
-    TSConstMacro = na,
-    TSConstant = na,
-    TSConstructor = na,
-    TSDanger = na,
-    TSEnvironment = na,
-    TSEnvironmentName = na,
-    TSField = na,
-    TSFuncBuiltin = na,
-    TSInclude = na,
-    TSLiteral = na,
-    TSMath = na,
-    TSMethod = na,
-    TSNone = na,
-    TSParameter = na,
-    TSParameterReference = na,
-    TSProperty = na,
-    TSPunctBracket = na,
-    TSPunctDelimiter = na,
-    TSPunctSpecial = na,
-    TSStringSpecial = na,
-    TSTitle = na,
-    TSWarning = na,
-]]
 
--- Language-specific --
--- Markdown
--- hl["markdownHeadingDelimiter"] = { fg = yellow[0] }
--- hl["markdownCodeBlock"] = { fg = yellow[0] }
--- hl["markdownbold"] = { bold = true }
--- hl["markdownbolditalic"] = { bold = true, italic = true }
--- hl["markdownCodeDelimiter"] = { fg = yellow[0] }
--- hl["markdownfootnote"] = { fg = red[1] }
--- hl["markdownfootnotedefinition"] = na
--- hl["markdownitalic"] = { italic = true }
--- hl["markdownlinebreak"] = { fg = green[1], italic = true }
--- hl["markdownlinktext"] = { fg = green[1], italic = true }
-hl["markdownlistmarker"] = { fg = yellow[0] }
--- hl["markdownrule"] = na
-
-hl["parafirstword"] = { bold = true }
 
 -- Plugins --
 for _, type in ipairs({ "Text", "Read", "Write" }) do
   hl["IlluminatedWord" .. type] = { bg = gray[3], fg = yellow[0] }
 end
 
-
 -- simrat39/symbols-outline.nvim
 hl["FocusedSymbol"] = na
+
+-- j-hui/fidget.nvim
+hl["FidgetTask"] = { fg = gray[3] }
+hl["FidgetTitle"] = { link = "Statement" }
+
+-- lukas-reineke/virt-column.nvim
+hl["VirtColumn"] = { link = "VertSplit" }
 
 -- itchyny/vim-highlighturl
 vim.g.highlighturl_guifg = blue[3]
 
---------------------------------------------------
--- Links
---------------------------------------------------
---[[
-    Commonly linked groups:
-        Boolean           -> Constant       
-        Character         -> Constant       
-        Conditional       -> Statement      
-        Debug             -> Special
-        Define            -> PreProc        
-        Delimiter         -> Special        
-        Exception         -> Statement      
-        Float             -> Constant       
-        Function          -> Identifier
-        Include           -> PreProc        
-        Keyword           -> Statement
-        Label             -> Statement      
-        Macro             -> PreProc        
-        Number            -> Constant
-        Operator          -> Statement
-        PopupSelected     -> PmenuSel
-        PreCondit         -> PreProc        
-        QuickFixLine      -> Search
-        Repeat            -> Statement      
-        SpecialChar       -> Special        
-        SpecialComment    -> Special
-        StatusLineTerm    -> StatusLine
-        StatusLineTermNC  -> StatusLineNC
-        StorageClass      -> Type           
-        String            -> Constant
-        Structure         -> Type           
-        Tag               -> Special
-        Typedef           -> Type           
-]]
-
--- UI --
-link["Delimiter"] = { link = "Special" }
-link["EndOfBuffer"] = { link = "NonText" }
-link["ErrorMsg"] = { link = "Error" }
-link["FloatBorder"] = { link = "StatusLine" }
-link["Folded"] = { link = "NonText" }
-link["FoldColumn"] = { link = "ColorColumn" }
-link["Label"] = { link = "Keyword" }
-link["LineNr"] = { link = "NonText" }
-link["MoreMsg"] = { link = "ModeMsg" }
-link["Pmenu"] = { link = "StatusLine" }
-link["QuickFixLine"] = { link = "Search" }
-link["SignColumn"] = { link = "StatusLineNC" }
-link["SpecialChar"] = { link = "Special" }
-link["StatusLineNC"] = { link = "__termbg" }
-link["Substitute"] = { link = "CursorLine" }
-link["TabLineFill"] = { link = "__termbg" }
-link["Title"] = { link = "Directory" }
-link["Todo"] = { link = "SpecialComment" }
-link["TSNote"] = { link = "SpecialComment" }
-link["WarningMsg"] = { link = "Error" }
-link["Whitespace"] = { link = "NonText" }
-
--- Syntax --
-link["Boolean"] = { link = "Constant" }
-link["Conditional"] = { link = "Statement" }
-link["Define"] = { link = "PreProc" }
-link["Exception"] = { link = "Statement" }
-link["Float"] = { link = "Number" }
-link["Include"] = { link = "PreProc" }
-link["Macro"] = { link = "PreProc" }
-link["Operator"] = { link = "Statement" }
-link["PreCondit"] = { link = "PreProc" }
-link["Repeat"] = { link = "Statement" }
-link["StorageClass"] = { link = "Type" }
-link["Structure"] = { link = "Type" }
-link["Typedef"] = { link = "Type" }
-
-
--- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
--- TODO: clean up, this is a mess
-link["gitcommitArrow"] = { link = "Statement" }
-hl["gitcommitBlank"] = { fg = green[0] }
-hl["gitcommitBranch"] = { fg = green[0] }
-hl["gitcommitDiscarded"] = { fg = green[0] }
-hl["gitcommitDiscardedFile"] = { fg = green[0] }
-hl["gitcommitDiscardedType"] = { fg = red[1] }
-hl["gitcommitHeader"] = { bg = gray[0], italic = true }
-hl["gitcommitOnBranch"] = { bg = gray[0], italic = true }
-hl["gitcommitType"] = { fg = red[0], italic = true }
-hl["gitcommitUnmerged"] = { fg = green[0] }
--- hl["gitcommitDiscardedArrow"] = { fg = green[0] }
--- hl["gitcommitFile"] = { fg = green[0] }
--- hl["gitcommitNoBranch"] = { fg = green[0] }
--- hl["gitcommitNoChanges"] = { fg = green[0] }
--- hl["gitcommitOverflow"] = { fg = green[0] }
--- hl["gitcommitSelected"] = { fg = green[3] }
--- hl["gitcommitSelectedArrow"] = { fg = green[0] }
--- hl["gitcommitSelectedFile"] = { fg = green[0] }
--- hl["gitcommitSelectedType"] = { fg = green[0] }
--- hl["gitcommitUnmergedArrow"] = { fg = green[0] }
--- hl["gitcommitUnmergedFile"] = { fg = green[0] }
--- hl["gitcommitUnmergedType"] = { fg = green[0] }
--- hl["gitcommitUntracked"] = { fg = green[0] }
--- hl["gitcommitUntrackedFile"] = { fg = green[0] }
-link["gitcommitSummary"] = { link = "Directory" }
-
-
--- https://github.com/vim/vim/blob/2d8ed0203aedd5f6c22efa99394a3677c17c7a7a/runtime/syntax/help.vim
-link['helpCommand'] = { link = "Normal" }
-link['helpExample'] = { link = "String" }
-link['helpHyperTextEntry'] = { link = "Directory" }
-link['helpOption'] = { link = "Normal" }
-link['helpVim'] = { link = "Normal" }
--- syntax['helpHyperTextJump'] = {fg=colors.blue}
--- syntax['helpNote'] = {fg=colors.magenta}
-
-
--- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
-link["diffOldFile"] = { link = "PreProc" }
-link["diffNewFile"] = { bg = gray[0], underline = true }
-link["diffIndexLine"] = { link = "PreProc" }
-hl["diffFile"] = { bg = gray[0], italic = true }
-link["diffNoEOL"] = { link = "DiagnosticError" }
-hl["diffRemoved"] = { fg = red[1] }
-hl["diffChanged"] = { fg = yellow[0] }
-hl["diffAdded"] = { fg = green[3] }
-hl["diffLine"] = { fg = blue[2], italic = true, underline = true }
-link["diffSubname"] = { link = "Directory" }
-
-
--- Plugins --
-link["BiscuitColor"] = { link = "NonText" }
-
--- j-hui/fidget.nvim
-link["FidgetTask"] = { fg = gray[3] }
-link["FidgetTitle"] = { link = "Statement" }
-
--- lukas-reineke/virt-column.nvim
-link["VirtColumn"] = { link = "VertSplit" }
 
 --------------------------------------------------
 -- Execute
@@ -322,4 +221,4 @@ vim.g.colors_name = "still_light"
 
 -- call highlight
 set_hl(hl)
-set_hl(link)
+set_hl(hl)
