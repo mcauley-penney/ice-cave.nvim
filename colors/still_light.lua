@@ -58,6 +58,7 @@ end
 hl["__termdarken"] = { bg = gray[0] }
 hl["ParaFirstWord"] = { bold = true }
 hl["Success"] = { fg = green[0] }
+hl["WinSeparatorActive"] = { fg = yellow[0] }
 
 
 -- UI --
@@ -78,7 +79,7 @@ hl["Question"] = { fg = green[3] }
 hl["Search"] = { fg = red[2], bg = gray[3] }
 hl["SpecialComment"] = { fg = yellow[0], bold = true }
 hl["SpecialKey"] = { fg = yellow[0], bold = true }
-hl["StatusLine"] = { bg = gray[0] }
+hl["StatusLine"] = { bg = gray[2] }
 hl["VertSplit"] = { fg = gray[2] }
 hl["Visual"] = { bg = gray[2] }
 hl["Yank"] = { fg = yellow[0], bg = gray[3] }
@@ -98,12 +99,12 @@ hl["SignColumn"] = { link = "StatusLineNC" }
 hl["SpecialChar"] = { link = "Special" }
 hl["StatusLineNC"] = { link = "__termbg" }
 hl["Substitute"] = { link = "CursorLine" }
-hl["TSNote"] = { link = "SpecialComment" }
 hl["TabLineFill"] = { link = "__termbg" }
 hl["Title"] = { link = "Directory" }
 hl["Todo"] = { link = "SpecialComment" }
 hl["WarningMsg"] = { link = "Error" }
 hl["Whitespace"] = { link = "NonText" }
+hl["WinBar"] = { link = "Normal" }
 
 
 -- Syntax --
@@ -191,27 +192,9 @@ hl["LspSignatureActiveParameter"] = { fg = red[2], italic = true }
 
 -- Treesitter --
 hl["TSNamespace"] = { fg = blue[1] }
+hl["TSNote"] = { link = "SpecialComment" }
 hl["TSStringEscape"] = { fg = green[1] }
 hl["TSStringRegex"] = { fg = green[1] }
-
-
--- Plugins --
-for _, type in ipairs({ "Text", "Read", "Write" }) do
-  hl["IlluminatedWord" .. type] = { bg = gray[3], fg = yellow[0] }
-end
-
--- simrat39/symbols-outline.nvim
-hl["FocusedSymbol"] = na
-
--- j-hui/fidget.nvim
-hl["FidgetTask"] = { fg = gray[3] }
-hl["FidgetTitle"] = { link = "Statement" }
-
--- lukas-reineke/virt-column.nvim
-hl["VirtColumn"] = { link = "VertSplit" }
-
--- itchyny/vim-highlighturl
-vim.g.highlighturl_guifg = blue[3]
 
 
 --------------------------------------------------
