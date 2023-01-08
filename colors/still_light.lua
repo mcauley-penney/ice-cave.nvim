@@ -1,72 +1,60 @@
 --[[
-    Author: MP
-    Notes:
-        hi groups: https://neovim.io/doc/user/syntax.html#highlight-groups
-        bg, set in term cfg: #292929
-
-    TODO:
-      1. what can we learn from https://github.com/p00f/alabaster_dark.nvim
+	Author: MP
+	Notes:
+		hi groups: https://neovim.io/doc/user/syntax.html#highlight-groups
+		bg, set in term cfg: #262626
 ]]
 
 local na = {}
 local gray = {
-  [0] = "#242424",
-  [1] = "#292929",
-  [2] = "#363636",
-  [3] = "#434343",
-  [4] = "#5c5c5c",
-  [5] = "#DBD3C9",
+	[0] = "#222222",
+	[1] = "#262626",
+	[2] = "#3b3b3b",
+	[3] = "#515151",
+	[4] = "#676767",
+	[5] = "#DBD3C9",
 }
 
 local green = {
-  [0] = "#4b8b51",
-  [1] = "#5C8145",
-  [2] = "#8CA576",
-  [3] = "#B3C3A4",
+	[1] = "#4b8b51",
+	[2] = "#8CA576",
+	[3] = "#B3C3A4",
 }
 
 local blue = {
-  [1] = "#616E88",
-  [2] = "#8296b0",
-  [3] = "#9aabbc",
+	[1] = "#616E88",
+	[2] = "#8296b0",
+	[3] = "#9aabbc",
 }
 
 local red = {
-  [0] = "#C3A4B3",
-  [1] = "#e26d5c",
-  [2] = "Red",
+	[0] = "#C3A4B3",
+	[1] = "#e26d5c",
+	[2] = "Red",
 }
 
 local yellow = {
-  [0] = "#FEAD4C",
+	[0] = "#FEAD4C",
 }
 
--- highlight dictionaries
+-- highlight dictionary
 local hl = {}
 
 local function set_hl(hl_tbl)
-  for group, opts in pairs(hl_tbl) do
-    vim.api.nvim_set_hl(0, group, opts)
-  end
+	for group, opts in pairs(hl_tbl) do
+		vim.api.nvim_set_hl(0, group, opts)
+	end
 end
 
 --------------------------------------------------
 -- Hightlights
 --------------------------------------------------
 
--- Custom --
-hl["__termdarken"] = { bg = gray[0] }
-hl["ParaFirstWord"] = { bold = true }
-hl["Success"] = { fg = green[0] }
-hl["WinSeparatorActive"] = { fg = yellow[0] }
-
-
 -- UI --
 hl["ColorColumn"] = na
-hl["Conceal"] = na
 hl["Cursor"] = { fg = red[2] }
-hl["CursorLine"] = { bg = gray[3], fg = yellow[0] }
-hl["CursorLineNr"] = { fg = gray[5] }
+hl["CursorLine"] = { fg = yellow[0], bg = gray[2] }
+hl["CursorLineNr"] = { fg = gray[3], bg = gray[2] }
 hl["Directory"] = { fg = blue[2], italic = true }
 hl["Error"] = { fg = red[2] }
 hl["MatchParen"] = { fg = red[2], bold = true }
@@ -74,15 +62,17 @@ hl["ModeMsg"] = { fg = green[3] }
 hl["MsgArea"] = na
 hl["NonText"] = { fg = gray[3], italic = true }
 hl["Normal"] = { fg = gray[5], bg = gray[1] }
-hl["PmenuSel"] = { bg = blue[1] }
+hl["PmenuSel"] = {bg = gray[3]}
 hl["Question"] = { fg = green[3] }
-hl["Search"] = { fg = red[2], bg = gray[3] }
+hl["Search"] = { fg = red[2], bg = gray[2] }
 hl["SpecialComment"] = { fg = yellow[0], bold = true }
 hl["SpecialKey"] = { fg = yellow[0], bold = true }
 hl["StatusLine"] = { bg = gray[2] }
+hl["StatusLineNC"] = na
+hl["TabLineFill"] = na
 hl["VertSplit"] = { fg = gray[2] }
 hl["Visual"] = { bg = gray[2] }
-hl["Yank"] = { fg = yellow[0], bg = gray[3] }
+hl["Conceal"] = { link = "Normal" }
 hl["Delimiter"] = { link = "Special" }
 hl["EndOfBuffer"] = { link = "NonText" }
 hl["ErrorMsg"] = { link = "Error" }
@@ -94,12 +84,12 @@ hl["Label"] = { link = "Keyword" }
 hl["LineNr"] = { link = "NonText" }
 hl["MoreMsg"] = { link = "ModeMsg" }
 hl["Pmenu"] = { link = "StatusLine" }
+hl["PmenuThumb"] = {link = "PmenuSel"}
+hl["PmenuSbar"] = {link = "Pmenu"}
 hl["QuickFixLine"] = { link = "Search" }
 hl["SignColumn"] = { link = "StatusLineNC" }
 hl["SpecialChar"] = { link = "Special" }
-hl["StatusLineNC"] = { link = "__termbg" }
-hl["Substitute"] = { link = "CursorLine" }
-hl["TabLineFill"] = { link = "__termbg" }
+hl["Substitute"] = { link = "Search" }
 hl["Title"] = { link = "Directory" }
 hl["Todo"] = { link = "SpecialComment" }
 hl["WarningMsg"] = { link = "Error" }
@@ -174,16 +164,16 @@ hl["diffOldFile"] = { link = "PreProc" }
 hl["diffSubname"] = { link = "Directory" }
 
 
--- LSP --
--- Diagnostics
+-- Lsp --
 for type, color in pairs({
-  Error = red[2],
-  Warn = yellow[0],
-  Info = blue[2],
-  Hint = gray[5]
+	Error = red[2],
+	Warn = yellow[0],
+	Info = blue[2],
+	Hint = gray[5],
+	Ok = green[1]
 }) do
-  hl["Diagnostic" .. type] = { fg = color }
-  hl["DiagnosticUnderline" .. type] = { sp = color, underline = true }
+	hl["Diagnostic" .. type] = { fg = color }
+	hl["DiagnosticUnderline" .. type] = { sp = color, underline = true }
 end
 
 -- Handlers
@@ -191,10 +181,27 @@ hl["LspSignatureActiveParameter"] = { fg = red[2], italic = true }
 
 
 -- Treesitter --
-hl["TSNamespace"] = { fg = blue[1] }
-hl["TSNote"] = { link = "SpecialComment" }
-hl["TSStringEscape"] = { fg = green[1] }
-hl["TSStringRegex"] = { fg = green[1] }
+-- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
+hl["@namespace"] = { fg = blue[1] }
+hl["@punctuation.special"] = { fg = blue[3] }
+hl["@string.regex"] = { fg = green[1] }
+hl["@text.emphasis"] = { italic = true }  -- "Normal" for markup languages
+hl["@text.strong"] = { bold = true }
+hl["@text.underline"] = {underline = true}
+hl["@text.uri"] = { fg = blue[3] }
+hl["@text.literal"] = { link = "Normal"}
+hl["@string.escape"] = { link = "@string.regex" }
+hl["@string.special"] = { link = "@string.regex" }
+
+-- Keywords
+for type, color in pairs({
+	danger = red[2],
+	warning = yellow[0],
+	todo = yellow[0],
+	note = blue[2],
+}) do
+	hl["@text." .. type] = { fg = color, bold = true }
+end
 
 
 --------------------------------------------------
@@ -203,5 +210,4 @@ hl["TSStringRegex"] = { fg = green[1] }
 vim.g.colors_name = "still_light"
 
 -- call highlight
-set_hl(hl)
 set_hl(hl)
