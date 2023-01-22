@@ -5,10 +5,12 @@
 		bg, set in term cfg: #262626
 ]]
 
+local utils = require("utils")
+
 local na = {}
 local gray = {
 	[0] = "#222222",
-	[1] = "#262626",
+	[1] = "#1c2128",
 	[2] = "#3b3b3b",
 	[3] = "#515151",
 	[4] = "#676767",
@@ -22,6 +24,7 @@ local green = {
 }
 
 local blue = {
+	[0] = "#0000ff",
 	[1] = "#616E88",
 	[2] = "#8296b0",
 	[3] = "#9aabbc",
@@ -30,7 +33,7 @@ local blue = {
 local red = {
 	[0] = "#C3A4B3",
 	[1] = "#e26d5c",
-	[2] = "Red",
+	[2] = "#ff0000"
 }
 
 local yellow = {
@@ -52,17 +55,16 @@ end
 
 -- UI --
 hl["ColorColumn"] = na
-hl["Cursor"] = { fg = red[2] }
-hl["CursorLine"] = { fg = yellow[0], bg = gray[2] }
+hl["Cursor"] = { bg = red[2] }
+hl["CursorLine"] = { fg = yellow[0], bg = utils.shade_color(gray[2], -10), bold = true }
 hl["CursorLineNr"] = { fg = gray[3], bg = gray[2] }
 hl["Directory"] = { fg = blue[2], italic = true }
 hl["Error"] = { fg = red[2] }
-hl["MatchParen"] = { fg = red[2], bold = true }
 hl["ModeMsg"] = { fg = green[3] }
 hl["MsgArea"] = na
 hl["NonText"] = { fg = gray[3], italic = true }
 hl["Normal"] = { fg = gray[5], bg = gray[1] }
-hl["PmenuSel"] = {bg = gray[3]}
+hl["PmenuSel"] = { bg = gray[3] }
 hl["Question"] = { fg = green[3] }
 hl["Search"] = { fg = red[2], bg = gray[2] }
 hl["SpecialComment"] = { fg = yellow[0], bold = true }
@@ -71,25 +73,27 @@ hl["StatusLine"] = { bg = gray[2] }
 hl["StatusLineNC"] = na
 hl["TabLineFill"] = na
 hl["VertSplit"] = { fg = gray[2] }
-hl["Visual"] = { bg = gray[2] }
+hl["Visual"] = { bg = utils.shade_color(red[2], -75) }
 hl["Conceal"] = { link = "Normal" }
 hl["Delimiter"] = { link = "Special" }
 hl["EndOfBuffer"] = { link = "NonText" }
 hl["ErrorMsg"] = { link = "Error" }
-hl["FloatBorder"] = { link = "StatusLine" }
-hl["FoldColumn"] = { link = "ColorColumn" }
+hl["FloatBorder"] = utils.update(hl["StatusLine"], { blend = 10 })
+hl["FoldColumn"] = { link = "Folded" }
 hl["Folded"] = { link = "NonText" }
 hl["IncSearch"] = { link = "Search" }
 hl["Label"] = { link = "Keyword" }
 hl["LineNr"] = { link = "NonText" }
+hl["MatchParen"] = { link = "CursorLine" }
 hl["MoreMsg"] = { link = "ModeMsg" }
 hl["Pmenu"] = { link = "StatusLine" }
-hl["PmenuThumb"] = {link = "PmenuSel"}
-hl["PmenuSbar"] = {link = "Pmenu"}
+hl["PmenuThumb"] = { link = "PmenuSel" }
+hl["PmenuSbar"] = { link = "Pmenu" }
 hl["QuickFixLine"] = { link = "Search" }
 hl["SignColumn"] = { link = "StatusLineNC" }
 hl["SpecialChar"] = { link = "Special" }
 hl["Substitute"] = { link = "Search" }
+hl["TermCursor"] = { link = "NonText" }
 hl["Title"] = { link = "Directory" }
 hl["Todo"] = { link = "SpecialComment" }
 hl["WarningMsg"] = { link = "Error" }
@@ -128,19 +132,19 @@ hl["Typedef"] = { link = "Type" }
 
 
 -- Filetype --
--- Git
+-- Gitcommit (info above the diff in a commit)
 -- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
-hl["gitcommitDiscardedType"] = { fg = red[1] }
+hl["gitcommitDiscardedType"] = { link = "DiffDelete" }
 hl["gitcommitHeader"] = { bg = gray[0], italic = true }
 hl["gitcommitOnBranch"] = { bg = gray[0], italic = true }
 hl["gitcommitType"] = { fg = red[0], italic = true }
 hl["gitcommitArrow"] = { link = "Statement" }
-hl["gitcommitBlank"] = { link = "Success" }
-hl["gitcommitBranch"] = { link = "Success" }
-hl["gitcommitDiscarded"] = { link = "Success" }
-hl["gitcommitDiscardedFile"] = { link = "Success" }
+hl["gitcommitBlank"] = { link = "DiffAdd" }
+hl["gitcommitBranch"] = { link = "DiffAdd" }
+hl["gitcommitDiscarded"] = { link = "DiffAdd" }
+hl["gitcommitDiscardedFile"] = { link = "DiffAdd" }
 hl["gitcommitSummary"] = { link = "Directory" }
-hl["gitcommitUnmerged"] = { link = "Success" }
+hl["gitcommitUnmerged"] = { link = "DiffAdd" }
 
 -- Help
 -- https://github.com/vim/vim/blob/2d8ed0203aedd5f6c22efa99394a3677c17c7a7a/runtime/syntax/help.vim
@@ -152,16 +156,15 @@ hl['helpVim'] = { link = "Normal" }
 
 -- diff
 -- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
-hl["diffAdded"] = { fg = green[3] }
-hl["diffChanged"] = { fg = yellow[0] }
-hl["diffFile"] = { bg = gray[0], italic = true }
-hl["diffLine"] = { fg = blue[2], italic = true, underline = true }
-hl["diffNewFile"] = { bg = gray[0], underline = true }
-hl["diffRemoved"] = { fg = red[1] }
-hl["diffIndexLine"] = { link = "PreProc" }
-hl["diffNoEOL"] = { link = "DiagnosticError" }
-hl["diffOldFile"] = { link = "PreProc" }
-hl["diffSubname"] = { link = "Directory" }
+hl["DiffAdd"] = { bg = "#121c04" }
+hl["DiffDelete"] = { bg = utils.shade_color(red[2], -70) }
+hl["DiffChange"] = { bg = "#232c4c" }
+hl["DiffText"] = { bg = "#3B4A80" }
+
+-- Gitcommit diffs
+hl["diffAdded"] = { link = "DiffAdd" }
+hl["diffChanged"] = { link = "DiffChange" }
+hl["diffRemoved"] = utils.update(hl["DiffDelete"], { fg = nil })
 
 
 -- Lsp --
@@ -173,6 +176,11 @@ for type, color in pairs({
 	Ok = green[1]
 }) do
 	hl["Diagnostic" .. type] = { fg = color }
+	hl["DiagnosticSign" .. type] = { fg = color }
+	hl["DiagnosticVirtualText" .. type] = {
+		fg = color,
+		bg = utils.shade_color(color, -80)
+	}
 	hl["DiagnosticUnderline" .. type] = { sp = color, underline = true }
 end
 
@@ -185,15 +193,15 @@ hl["LspSignatureActiveParameter"] = { fg = red[2], italic = true }
 hl["@namespace"] = { fg = blue[1] }
 hl["@punctuation.special"] = { fg = blue[3] }
 hl["@string.regex"] = { fg = green[1] }
-hl["@text.emphasis"] = { italic = true }  -- "Normal" for markup languages
+hl["@text.emphasis"] = { italic = true } -- "Normal" for markup languages
 hl["@text.strong"] = { bold = true }
-hl["@text.underline"] = {underline = true}
+hl["@text.underline"] = { underline = true }
 hl["@text.uri"] = { fg = blue[3] }
-hl["@text.literal"] = { link = "Normal"}
+hl["@text.literal"] = { link = "Normal" }
 hl["@string.escape"] = { link = "@string.regex" }
 hl["@string.special"] = { link = "@string.regex" }
 
--- Keywords
+-- Comment keywords
 for type, color in pairs({
 	danger = red[2],
 	warning = yellow[0],
