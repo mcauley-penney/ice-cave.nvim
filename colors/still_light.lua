@@ -2,9 +2,8 @@
 	Author: MP
 	Notes:
 		hi groups: https://neovim.io/doc/user/syntax.html#highlight-groups
-		bg, set in term cfg: #262626
+		bg, also set in terminal cfg: #1c2128
 ]]
-
 local utils = require("utils")
 
 local na = {}
@@ -12,7 +11,7 @@ local gray = {
 	[0] = "#222222",
 	[1] = "#1c2128",
 	[2] = "#3b3b3b",
-	[3] = "#515151",
+	[3] = "#484848",
 	[4] = "#676767",
 	[5] = "#DBD3C9",
 }
@@ -50,19 +49,17 @@ local function set_hl(hl_tbl)
 end
 
 --------------------------------------------------
--- Hightlights
+-- UI
 --------------------------------------------------
-
--- UI --
 hl["ColorColumn"] = na
 hl["Cursor"] = { bg = red[2] }
-hl["CursorLine"] = { fg = yellow[0], bg = utils.shade_color(gray[2], -10), bold = true }
-hl["CursorLineNr"] = { fg = gray[3], bg = gray[2] }
-hl["Directory"] = { fg = blue[2], italic = true }
+hl["CursorLine"] = { fg = yellow[0], bg = utils.shade_color(gray[2], -25) }
+hl["CursorLineNr"] = { fg = yellow[0] }
+hl["Directory"] = { fg = blue[2] }
 hl["Error"] = { fg = red[2] }
 hl["ModeMsg"] = { fg = green[3] }
 hl["MsgArea"] = na
-hl["NonText"] = { fg = gray[3], italic = true }
+hl["NonText"] = { fg = gray[3] }
 hl["Normal"] = { fg = gray[5], bg = gray[1] }
 hl["PmenuSel"] = { bg = gray[3] }
 hl["Question"] = { fg = green[3] }
@@ -90,7 +87,7 @@ hl["Pmenu"] = { link = "StatusLine" }
 hl["PmenuThumb"] = { link = "PmenuSel" }
 hl["PmenuSbar"] = { link = "Pmenu" }
 hl["QuickFixLine"] = { link = "Search" }
-hl["SignColumn"] = { link = "StatusLineNC" }
+hl["SignColumn"] = { link = "Normal" }
 hl["SpecialChar"] = { link = "Special" }
 hl["Substitute"] = { link = "Search" }
 hl["TermCursor"] = { link = "NonText" }
@@ -101,12 +98,14 @@ hl["Whitespace"] = { link = "NonText" }
 hl["WinBar"] = { link = "Normal" }
 
 
--- Syntax --
+--------------------------------------------------
+--  Syntax
+--------------------------------------------------
 hl["Character"] = { fg = green[2] }
-hl["Comment"] = { fg = gray[4], italic = true }
+hl["Comment"] = { fg = gray[4] }
 hl["Constant"] = { fg = red[0] }
 hl["Exception"] = { fg = red[2] }
-hl["Function"] = { italic = true }
+hl["Function"] = na
 hl["Identifier"] = na
 hl["Keyword"] = { fg = blue[2] }
 hl["Number"] = { fg = red[1] }
@@ -131,13 +130,22 @@ hl["Structure"] = { link = "Type" }
 hl["Typedef"] = { link = "Type" }
 
 
--- Filetype --
+--------------------------------------------------
+-- Filetype
+--------------------------------------------------
+-- diff
+-- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
+hl["DiffAdd"] = { bg = "#121c04" }
+hl["DiffDelete"] = { bg = utils.shade_color(red[2], -70) }
+hl["DiffChange"] = { bg = "#232c4c" }
+hl["DiffText"] = { bg = "#3B4A80" }
+
 -- Gitcommit (info above the diff in a commit)
 -- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
 hl["gitcommitDiscardedType"] = { link = "DiffDelete" }
-hl["gitcommitHeader"] = { bg = gray[0], italic = true }
-hl["gitcommitOnBranch"] = { bg = gray[0], italic = true }
-hl["gitcommitType"] = { fg = red[0], italic = true }
+hl["gitcommitHeader"] = { bg = gray[0] }
+hl["gitcommitOnBranch"] = { bg = gray[0] }
+hl["gitcommitType"] = { fg = red[0] }
 hl["gitcommitArrow"] = { link = "Statement" }
 hl["gitcommitBlank"] = { link = "DiffAdd" }
 hl["gitcommitBranch"] = { link = "DiffAdd" }
@@ -146,28 +154,28 @@ hl["gitcommitDiscardedFile"] = { link = "DiffAdd" }
 hl["gitcommitSummary"] = { link = "Directory" }
 hl["gitcommitUnmerged"] = { link = "DiffAdd" }
 
--- Help
--- https://github.com/vim/vim/blob/2d8ed0203aedd5f6c22efa99394a3677c17c7a7a/runtime/syntax/help.vim
-hl['helpCommand'] = { link = "Normal" }
-hl['helpExample'] = { link = "String" }
-hl['helpHyperTextEntry'] = { link = "Directory" }
-hl['helpOption'] = { link = "Normal" }
-hl['helpVim'] = { link = "Normal" }
-
--- diff
--- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
-hl["DiffAdd"] = { bg = "#121c04" }
-hl["DiffDelete"] = { bg = utils.shade_color(red[2], -70) }
-hl["DiffChange"] = { bg = "#232c4c" }
-hl["DiffText"] = { bg = "#3B4A80" }
-
 -- Gitcommit diffs
 hl["diffAdded"] = { link = "DiffAdd" }
 hl["diffChanged"] = { link = "DiffChange" }
 hl["diffRemoved"] = utils.update(hl["DiffDelete"], { fg = nil })
 
+-- Help
+-- https://github.com/vim/vim/blob/2d8ed0203aedd5f6c22efa99394a3677c17c7a7a/runtime/syntax/help.vim
+hl["helpCommand"] = { link = "Normal" }
+hl["helpExample"] = { link = "String" }
+hl["helpHyperTextEntry"] = { link = "Directory" }
+hl["helpOption"] = { link = "Normal" }
+hl["helpVim"] = { link = "Normal" }
 
--- Lsp --
+-- Markdown
+-- rules = horizontal bars
+hl["markdownRule"] = { link = "NonText" }
+hl["markdownHeadingRule"] = { link = "markdownRule" }
+
+
+--------------------------------------------------
+-- Lsp
+--------------------------------------------------
 for type, color in pairs({
 	Error = red[2],
 	Warn = yellow[0],
@@ -176,7 +184,7 @@ for type, color in pairs({
 	Ok = green[1]
 }) do
 	hl["Diagnostic" .. type] = { fg = color }
-	hl["DiagnosticSign" .. type] = { fg = color }
+	hl["DiagnosticSign" .. type] = utils.update(hl["SignColumn"], { fg = color })
 	hl["DiagnosticVirtualText" .. type] = {
 		fg = color,
 		bg = utils.shade_color(color, -80)
@@ -185,15 +193,17 @@ for type, color in pairs({
 end
 
 -- Handlers
-hl["LspSignatureActiveParameter"] = { fg = red[2], italic = true }
+hl["LspSignatureActiveParameter"] = { fg = red[2] }
 
 
--- Treesitter --
+--------------------------------------------------
+-- Treesitter
+--------------------------------------------------
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
 hl["@namespace"] = { fg = blue[1] }
 hl["@punctuation.special"] = { fg = blue[3] }
 hl["@string.regex"] = { fg = green[1] }
-hl["@text.emphasis"] = { italic = true } -- "Normal" for markup languages
+hl["@text.emphasis"] = { reverse = true } -- "Normal" for markup languages
 hl["@text.strong"] = { bold = true }
 hl["@text.underline"] = { underline = true }
 hl["@text.uri"] = { fg = blue[3] }
@@ -208,13 +218,10 @@ for type, color in pairs({
 	todo = yellow[0],
 	note = blue[2],
 }) do
-	hl["@text." .. type] = { fg = color, bold = true }
+	hl["@text." .. type] = { fg = color }
 end
 
 
---------------------------------------------------
--- Execute
---------------------------------------------------
 vim.g.colors_name = "still_light"
 
 -- call highlight
