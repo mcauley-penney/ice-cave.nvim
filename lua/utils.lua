@@ -51,7 +51,7 @@ function M.make_hl_grp(grp_name, hi)
 end
 
 function M.update(hl_tbl, opts)
-	return vim.tbl_extend("force", hl_tbl, opts)
+	return vim.tbl_deep_extend("force", hl_tbl, opts)
 end
 
 return M

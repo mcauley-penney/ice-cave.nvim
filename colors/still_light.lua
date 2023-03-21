@@ -8,12 +8,13 @@ local utils = require("utils")
 
 local na = {}
 local gray = {
-	[0] = "#222222",
+	[0] = "#181A18",
 	[1] = "#1c2128",
-	[2] = "#3b3b3b",
-	[3] = "#484848",
-	[4] = "#676767",
-	[5] = "#DBD3C9",
+	[2] = "#222222",
+	[3] = "#3b3b3b",
+	[4] = "#484848",
+	[5] = "#676767",
+	[6] = "#DBD3C9",
 }
 
 local green = {
@@ -24,7 +25,6 @@ local green = {
 
 local blue = {
 	[0] = "#0000ff",
-	[1] = "#616E88",
 	[2] = "#8296b0",
 	[3] = "#9aabbc",
 }
@@ -39,6 +39,7 @@ local yellow = {
 	[0] = "#FEAD4C",
 }
 
+
 -- highlight dictionary
 local hl = {}
 
@@ -48,38 +49,40 @@ local function set_hl(hl_tbl)
 	end
 end
 
+
 --------------------------------------------------
 -- UI
 --------------------------------------------------
 hl["ColorColumn"] = na
-hl["Cursor"] = { bg = red[2] }
-hl["CursorLine"] = { fg = yellow[0], bg = utils.shade_color(gray[2], -25) }
+hl["Cursor"] = { bg = yellow[0] }
+hl["CursorLine"] = { fg = yellow[0], bg = utils.shade_color(gray[3], -25) }
 hl["CursorLineNr"] = { fg = yellow[0] }
 hl["Directory"] = { fg = blue[2] }
 hl["Error"] = { fg = red[2] }
 hl["ModeMsg"] = { fg = green[3] }
 hl["MsgArea"] = na
-hl["NonText"] = { fg = gray[3] }
-hl["Normal"] = { fg = gray[5], bg = gray[1] }
-hl["PmenuSel"] = { bg = gray[3] }
+hl["NonText"] = { fg = gray[4] }
+hl["Normal"] = { fg = gray[6], bg = gray[1] }
+hl["PmenuSel"] = { bg = gray[4] }
 hl["Question"] = { fg = green[3] }
-hl["Search"] = { fg = red[2], bg = gray[2] }
+hl["Search"] = { fg = blue[2], bg = gray[3] }
 hl["SpecialComment"] = { fg = yellow[0], bold = true }
 hl["SpecialKey"] = { fg = yellow[0], bold = true }
-hl["StatusLine"] = { bg = gray[2] }
+hl["StatusLine"] = { bg = gray[3] }
 hl["StatusLineNC"] = na
+hl["Substitute"] = { fg = red[2], bg = gray[3] }
 hl["TabLineFill"] = na
-hl["VertSplit"] = { fg = gray[2] }
+hl["VertSplit"] = { fg = gray[3] }
 hl["Visual"] = { bg = utils.shade_color(red[2], -75) }
 hl["Conceal"] = { link = "Normal" }
 hl["Delimiter"] = { link = "Special" }
 hl["EndOfBuffer"] = { link = "NonText" }
 hl["ErrorMsg"] = { link = "Error" }
-hl["FloatBorder"] = utils.update(hl["StatusLine"], { blend = 10 })
+hl["FloatBorder"] = { link = "Pmenu" }
 hl["FoldColumn"] = { link = "Folded" }
 hl["Folded"] = { link = "NonText" }
 hl["IncSearch"] = { link = "Search" }
-hl["Label"] = { link = "Keyword" }
+hl["Label"] = { link = "SpecialComment" }
 hl["LineNr"] = { link = "NonText" }
 hl["MatchParen"] = { link = "CursorLine" }
 hl["MoreMsg"] = { link = "ModeMsg" }
@@ -89,7 +92,6 @@ hl["PmenuSbar"] = { link = "Pmenu" }
 hl["QuickFixLine"] = { link = "Search" }
 hl["SignColumn"] = { link = "Normal" }
 hl["SpecialChar"] = { link = "Special" }
-hl["Substitute"] = { link = "Search" }
 hl["TermCursor"] = { link = "NonText" }
 hl["Title"] = { link = "Directory" }
 hl["Todo"] = { link = "SpecialComment" }
@@ -102,16 +104,14 @@ hl["WinBar"] = { link = "Normal" }
 --  Syntax
 --------------------------------------------------
 hl["Character"] = { fg = green[2] }
-hl["Comment"] = { fg = gray[4] }
+hl["Comment"] = { fg = gray[5] }
 hl["Constant"] = { fg = red[0] }
 hl["Exception"] = { fg = red[2] }
-hl["Function"] = na
-hl["Identifier"] = na
 hl["Keyword"] = { fg = blue[2] }
 hl["Number"] = { fg = red[1] }
-hl["PreProc"] = { bg = gray[0] }
+hl["Operator"] = { fg = yellow[0] }
+hl["PreProc"] = { bg = gray[1] }
 hl["Special"] = na
-hl["Statement"] = { fg = yellow[0] }
 hl["String"] = { fg = green[3] }
 hl["Tag"] = na
 hl["Type"] = { fg = blue[3] }
@@ -120,11 +120,13 @@ hl["Conditional"] = { link = "Statement" }
 hl["Define"] = { link = "PreProc" }
 hl["Exception"] = { link = "Statement" }
 hl["Float"] = { link = "Number" }
+hl["Function"] = { link = "Normal" }
+hl["Identifier"] = { link = "Normal" }
 hl["Include"] = { link = "PreProc" }
 hl["Macro"] = { link = "PreProc" }
-hl["Operator"] = { link = "Statement" }
 hl["PreCondit"] = { link = "PreProc" }
 hl["Repeat"] = { link = "Statement" }
+hl["Statement"] = { link = "Keyword" }
 hl["StorageClass"] = { link = "Type" }
 hl["Structure"] = { link = "Type" }
 hl["Typedef"] = { link = "Type" }
@@ -143,8 +145,8 @@ hl["DiffText"] = { bg = "#3B4A80" }
 -- Gitcommit (info above the diff in a commit)
 -- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
 hl["gitcommitDiscardedType"] = { link = "DiffDelete" }
-hl["gitcommitHeader"] = { bg = gray[0] }
-hl["gitcommitOnBranch"] = { bg = gray[0] }
+hl["gitcommitHeader"] = { bg = gray[1] }
+hl["gitcommitOnBranch"] = { bg = gray[1] }
 hl["gitcommitType"] = { fg = red[0] }
 hl["gitcommitArrow"] = { link = "Statement" }
 hl["gitcommitBlank"] = { link = "DiffAdd" }
@@ -180,11 +182,11 @@ for type, color in pairs({
 	Error = red[2],
 	Warn = yellow[0],
 	Info = blue[2],
-	Hint = gray[5],
+	Hint = gray[6],
 	Ok = green[1]
 }) do
 	hl["Diagnostic" .. type] = { fg = color }
-	hl["DiagnosticSign" .. type] = utils.update(hl["SignColumn"], { fg = color })
+	hl["DiagnosticSign" .. type] = utils.update(hl["Normal"], { fg = color })
 	hl["DiagnosticVirtualText" .. type] = {
 		fg = color,
 		bg = utils.shade_color(color, -80)
@@ -200,16 +202,19 @@ hl["LspSignatureActiveParameter"] = { fg = red[2] }
 -- Treesitter
 --------------------------------------------------
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
-hl["@namespace"] = { fg = blue[1] }
-hl["@punctuation.special"] = { fg = blue[3] }
+hl["@keyword.operator"] = { link = "Operator" }
+hl["@namespace"] = { fg = blue[2] }
+hl["@property"] = { link = "@field" }
+hl["@punctuation.special"] = { link = "Normal" }
+hl["@string.documentation"] = { link = "Comment" }
+hl["@string.escape"] = { link = "@string.regex" }
 hl["@string.regex"] = { fg = green[1] }
+hl["@string.special"] = { link = "@string.regex" }
 hl["@text.emphasis"] = { reverse = true } -- "Normal" for markup languages
+hl["@text.literal"] = { link = "Normal" }
 hl["@text.strong"] = { bold = true }
 hl["@text.underline"] = { underline = true }
 hl["@text.uri"] = { fg = blue[3] }
-hl["@text.literal"] = { link = "Normal" }
-hl["@string.escape"] = { link = "@string.regex" }
-hl["@string.special"] = { link = "@string.regex" }
 
 -- Comment keywords
 for type, color in pairs({
@@ -218,7 +223,7 @@ for type, color in pairs({
 	todo = yellow[0],
 	note = blue[2],
 }) do
-	hl["@text." .. type] = { fg = color }
+	hl["@text." .. type] = { fg = color, bold = true }
 end
 
 
