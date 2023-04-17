@@ -1,3 +1,15 @@
-<rt>Now where is everybody</rt>
+# 🚪 hl-dungeon &ensp; <sub><sup><sub><sup>Give me some peace and quiet</sup></sub></sup></sub>
 
-![image0](https://user-images.githubusercontent.com/59481467/187098235-f9fcb07f-0577-46ab-892f-0109976b75e2.jpg)
+
+## Installation
+
+```lua
+{
+    "mcauley-penney"/"hl-dungeon.nvim"
+}
+```
+
+
+## Influences
+1. [Alabaster](https://github.com/tonsky/sublime-scheme-alabaster)
+2. [Nord](https://www.nordtheme.com/) and [iceberg.vim](https://github.com/cocopon/iceberg.vim)
