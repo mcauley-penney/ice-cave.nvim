@@ -8,26 +8,21 @@ local utils = require("utils")
 
 
 local na    = {}
-
 local gray0 = "#1c2128"
-local gray1 = "#2F2F2F"
+local gray1 = "#2f2f2f"
 local gray2 = "#3b3b3b"
 local gray3 = "#585654"
 local gray4 = "#7d7a77"
-local gray5 = "#E9E4DE"
-
-local red0  = "#C3A4B3"
+local gray5 = "#e9e4de"
+local red0  = "#c3a4b3"
 local red1  = "#e26d5c"
 local red2  = "#ff0000"
-
-local ylw0  = "#E8A63B"
-
+local ylw0  = "#e8a63b"
 local grn0  = "#4b8b51"
-local grn1  = "#B3C3A4"
-
-local blue0 = "#3B4A80"
+local grn1  = "#b3c3a4"
+local blue0 = "#3b4a80"
 local blue1 = "#8296b0"
-local blue2 = "#A6B4E7"
+local blue2 = "#a6b4e7"
 
 
 -- highlight dictionary
@@ -48,6 +43,7 @@ hl["Cursor"] = { bg = red2 }
 hl["CursorLine"] = { fg = ylw0, bg = gray2 }
 hl["Directory"] = { fg = blue1 }
 hl["Error"] = { fg = red2 }
+hl["FloatBorder"] = { bg = gray1, fg = gray1 }
 hl["Label"] = na
 hl["ModeMsg"] = { fg = grn1 }
 hl["MsgArea"] = na
@@ -64,12 +60,13 @@ hl["Substitute"] = { fg = red2, bg = gray2 }
 hl["TabLineFill"] = na
 hl["VertSplit"] = { fg = gray2 }
 hl["Visual"] = { bg = gray2 }
+hl["Underlined"] = { underline = true }
+
 hl["Conceal"] = { link = "Normal" }
 hl["CursorLineNr"] = { link = "Normal" }
 hl["Delimiter"] = { link = "Special" }
 hl["EndOfBuffer"] = { link = "NonText" }
 hl["ErrorMsg"] = { link = "Error" }
-hl["FloatBorder"] = { link = "Pmenu" }
 hl["FoldColumn"] = { link = "Folded" }
 hl["Folded"] = { link = "NonText" }
 hl["IncSearch"] = { link = "Search" }
@@ -85,7 +82,6 @@ hl["SpecialChar"] = { link = "Special" }
 hl["TermCursor"] = { link = "NonText" }
 hl["Title"] = { link = "Directory" }
 hl["Todo"] = { link = "SpecialComment" }
-hl["Underlined"] = { underline = true }
 hl["WarningMsg"] = { link = "Error" }
 hl["Whitespace"] = { link = "NonText" }
 hl["WinBar"] = { link = "Normal" }
@@ -94,19 +90,20 @@ hl["WinBar"] = { link = "Normal" }
 --------------------------------------------------
 --  Syntax
 --------------------------------------------------
-hl["Character"] = { link = "String" }
 hl["Comment"] = { fg = gray4 }
 hl["Constant"] = { fg = red0 }
 hl["Exception"] = { fg = red2 }
 hl["Keyword"] = { fg = blue1 }
 hl["Number"] = { fg = red1 }
 hl["Operator"] = { fg = ylw0 }
-hl["PreProc"] = { bg = gray0 }
+hl["PreProc"] = na
 hl["Special"] = na
 hl["String"] = { fg = grn1 }
 hl["Tag"] = na
 hl["Type"] = { fg = blue1 }
+
 hl["Boolean"] = { link = "Constant" }
+hl["Character"] = { link = "String" }
 hl["Conditional"] = { link = "Statement" }
 hl["Define"] = { link = "PreProc" }
 hl["Exception"] = { link = "Statement" }
@@ -136,8 +133,8 @@ hl["DiffText"] = { bg = blue0 }
 -- Gitcommit (info above the diff in a commit)
 -- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
 hl["gitcommitDiscardedType"] = { link = "DiffDelete" }
-hl["gitcommitHeader"] = { bg = gray0 }
-hl["gitcommitOnBranch"] = { bg = gray0 }
+hl["gitcommitHeader"] = na
+hl["gitcommitOnBranch"] = na
 hl["gitcommitType"] = { fg = red0 }
 hl["gitcommitArrow"] = { link = "Statement" }
 hl["gitcommitBlank"] = { link = "DiffAdd" }
@@ -167,7 +164,7 @@ hl["markdownHeadingRule"] = { link = "markdownRule" }
 
 
 --------------------------------------------------
--- Lsp
+-- LSP
 --------------------------------------------------
 for type, color in pairs({
 	Error = red2,

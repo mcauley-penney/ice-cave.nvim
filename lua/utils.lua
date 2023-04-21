@@ -1,5 +1,6 @@
 local M = {}
 
+
 -- Stolen from toggleterm.nvim
 --
 ---Convert a hex color to an rgb color
@@ -12,6 +13,7 @@ local function to_rgb(color)
 			tonumber(color:sub(4, 5), 16),
 			tonumber(color:sub(6), 16)
 end
+
 
 -- Stolen from toggleterm.nvim
 --
@@ -35,20 +37,6 @@ function M.shade_color(color, percent)
 	return "#" .. string.format("%02x%02x%02x", r, g, b)
 end
 
---- get rgb str from highlight group name
---- @tparam hi: highlight group name, e.g. Special
---- @tparam type: background or foreground
-function M.get_hl_grp_rgb(grp, type)
-	local hlID = vim.api.nvim_get_hl_id_by_name(grp)
-
-	return vim.fn.synIDattr(hlID, type, "gui")
-end
-
-function M.make_hl_grp(grp_name, hi)
-	vim.api.nvim_set_hl(0, grp_name, hi)
-
-	return table.concat({ "%#", grp_name, "#" }, "")
-end
 
 function M.update(hl_tbl, opts)
 	return vim.tbl_deep_extend("force", hl_tbl, opts)
