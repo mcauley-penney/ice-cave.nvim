@@ -7,22 +7,23 @@
 local utils = require("utils")
 
 
-local na    = {}
-local gray0 = "#1c2128"
-local gray1 = "#2f2f2f"
-local gray2 = "#3b3b3b"
-local gray3 = "#585654"
-local gray4 = "#7d7a77"
-local gray5 = "#e9e4de"
-local red0  = "#c3a4b3"
-local red1  = "#e26d5c"
-local red2  = "#ff0000"
-local ylw0  = "#e8a63b"
-local grn0  = "#4b8b51"
-local grn1  = "#b3c3a4"
-local blue0 = "#3b4a80"
-local blue1 = "#8296b0"
-local blue2 = "#a6b4e7"
+local na     = {}
+local base00 = "#1c2128"
+local base01 = "#25282E"
+local base02 = "#30343C"
+local base03 = "#3C414A"
+local base04 = "#606368"
+local base05 = "#cecece"
+local base06 = "#c3a4b3"
+local base07 = "#e26d5c"
+local base08 = "#ff0000"
+local base09 = "#e8a63b"
+local base0A = "#4b8b51"
+local base0B = "#8391A7"
+local base0C = "#b3c3a4"
+local base0D = "#3b4a80"
+local base0E = "#6C94BC"
+local base0F = "#a6b4e7"
 
 
 -- highlight dictionary
@@ -39,38 +40,36 @@ end
 -- UI
 --------------------------------------------------
 hl["ColorColumn"] = na
-hl["Cursor"] = { bg = red2 }
-hl["CursorLine"] = { fg = ylw0, bg = gray2 }
-hl["Directory"] = { fg = blue1 }
-hl["Error"] = { fg = red2 }
-hl["FloatBorder"] = { bg = gray1, fg = gray1 }
-hl["Label"] = na
-hl["ModeMsg"] = { fg = grn1 }
+hl["Cursor"] = { bg = base08 }
+hl["Directory"] = { fg = base0E }
+hl["Error"] = { fg = base08 }
+hl["LineNr"] = { fg = base04 }
+hl["ModeMsg"] = { fg = base0C }
 hl["MsgArea"] = na
-hl["NonText"] = { fg = gray3 }
-hl["Normal"] = { fg = gray5, bg = gray0 }
-hl["PmenuSel"] = { bg = gray2 }
-hl["Question"] = { fg = grn1 }
-hl["Search"] = { fg = blue1, bg = gray2 }
-hl["SpecialComment"] = { fg = ylw0 }
-hl["SpecialKey"] = { fg = ylw0 }
-hl["StatusLine"] = { bg = gray1 }
+hl["NonText"] = { fg = base03 }
+hl["Normal"] = { fg = base05, bg = base00 }
+hl["PmenuSel"] = { bg = base02 }
+hl["Question"] = { fg = base0C }
+hl["Search"] = { fg = base0E, bg = base02 }
+hl["SpecialComment"] = { fg = base09 }
+hl["SpecialKey"] = { fg = base09 }
+hl["StatusLine"] = { bg = base01 }
 hl["StatusLineNC"] = na
-hl["Substitute"] = { fg = red2, bg = gray2 }
+hl["Substitute"] = { fg = base08, bg = base02 }
 hl["TabLineFill"] = na
-hl["VertSplit"] = { fg = gray2 }
-hl["Visual"] = { bg = gray2 }
+hl["Visual"] = { bg = base02 }
 hl["Underlined"] = { underline = true }
 
 hl["Conceal"] = { link = "Normal" }
+hl["CursorLine"] = utils.update(hl["Visual"], { fg = base09 })
 hl["CursorLineNr"] = { link = "Normal" }
-hl["Delimiter"] = { link = "Special" }
+hl["Delimiter"] = { link = "Normal" }
 hl["EndOfBuffer"] = { link = "NonText" }
 hl["ErrorMsg"] = { link = "Error" }
+hl["FloatBorder"] = { bg = hl["StatusLine"]["bg"], fg = hl["StatusLine"]["bg"] }
 hl["FoldColumn"] = { link = "Folded" }
 hl["Folded"] = { link = "NonText" }
 hl["IncSearch"] = { link = "Search" }
-hl["LineNr"] = { link = "NonText" }
 hl["MatchParen"] = { link = "CursorLine" }
 hl["MoreMsg"] = { link = "ModeMsg" }
 hl["Pmenu"] = { link = "StatusLine" }
@@ -82,6 +81,7 @@ hl["SpecialChar"] = { link = "Special" }
 hl["TermCursor"] = { link = "NonText" }
 hl["Title"] = { link = "Directory" }
 hl["Todo"] = { link = "SpecialComment" }
+hl["VertSplit"] = { link = "NonText" }
 hl["WarningMsg"] = { link = "Error" }
 hl["Whitespace"] = { link = "NonText" }
 hl["WinBar"] = { link = "Normal" }
@@ -90,17 +90,16 @@ hl["WinBar"] = { link = "Normal" }
 --------------------------------------------------
 --  Syntax
 --------------------------------------------------
-hl["Comment"] = { fg = gray4 }
-hl["Constant"] = { fg = red0 }
-hl["Exception"] = { fg = red2 }
-hl["Keyword"] = { fg = blue1 }
-hl["Number"] = { fg = red1 }
-hl["Operator"] = { fg = ylw0 }
+hl["Comment"] = { fg = base04 }
+hl["Constant"] = { fg = base06 }
+hl["Function"] = { fg = base0E }
+hl["Keyword"] = { fg = base0B }
+hl["Number"] = { fg = base07 }
+hl["Operator"] = { fg = base09 }
 hl["PreProc"] = na
 hl["Special"] = na
-hl["String"] = { fg = grn1 }
+hl["String"] = { fg = base0C }
 hl["Tag"] = na
-hl["Type"] = { fg = blue1 }
 
 hl["Boolean"] = { link = "Constant" }
 hl["Character"] = { link = "String" }
@@ -108,15 +107,16 @@ hl["Conditional"] = { link = "Statement" }
 hl["Define"] = { link = "PreProc" }
 hl["Exception"] = { link = "Statement" }
 hl["Float"] = { link = "Number" }
-hl["Function"] = { link = "Normal" }
 hl["Identifier"] = { link = "Normal" }
 hl["Include"] = { link = "PreProc" }
+hl["Label"] = { link = "Conditional" }
 hl["Macro"] = { link = "PreProc" }
 hl["PreCondit"] = { link = "PreProc" }
-hl["Repeat"] = { link = "Statement" }
+hl["Repeat"] = { link = "Conditional" }
 hl["Statement"] = { link = "Keyword" }
 hl["StorageClass"] = { link = "Type" }
 hl["Structure"] = { link = "Type" }
+hl["Type"] = { link = "Normal" }
 hl["Typedef"] = { link = "Type" }
 
 
@@ -125,29 +125,33 @@ hl["Typedef"] = { link = "Type" }
 --------------------------------------------------
 -- diff
 -- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
-hl["DiffAdd"] = { bg = utils.shade_color(grn0, -70) }
-hl["DiffChange"] = { bg = utils.shade_color(blue0, -40) }
-hl["DiffDelete"] = { bg = utils.shade_color(red2, -70) }
-hl["DiffText"] = { bg = blue0 }
+hl["DiffAdd"] = { bg = utils.shade_color(base0A, -70) }
+hl["DiffChange"] = { bg = utils.shade_color(base0D, -40) }
+hl["DiffDelete"] = { bg = utils.shade_color(base08, -70) }
+hl["DiffText"] = { bg = base0D }
+
 
 -- Gitcommit (info above the diff in a commit)
 -- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
-hl["gitcommitDiscardedType"] = { link = "DiffDelete" }
 hl["gitcommitHeader"] = na
 hl["gitcommitOnBranch"] = na
-hl["gitcommitType"] = { fg = red0 }
+hl["gitcommitType"] = { fg = base06 }
+
 hl["gitcommitArrow"] = { link = "Statement" }
 hl["gitcommitBlank"] = { link = "DiffAdd" }
 hl["gitcommitBranch"] = { link = "DiffAdd" }
 hl["gitcommitDiscarded"] = { link = "DiffAdd" }
 hl["gitcommitDiscardedFile"] = { link = "DiffAdd" }
+hl["gitcommitDiscardedType"] = { link = "DiffDelete" }
 hl["gitcommitSummary"] = { link = "Directory" }
 hl["gitcommitUnmerged"] = { link = "DiffAdd" }
+
 
 -- Gitcommit diffs
 hl["diffAdded"] = { link = "DiffAdd" }
 hl["diffChanged"] = { link = "DiffChange" }
-hl["diffRemoved"] = utils.update(hl["DiffDelete"], { fg = nil })
+hl["diffRemoved"] = { link = "DiffDelete" }
+
 
 -- Help
 -- https://github.com/vim/vim/blob/2d8ed0203aedd5f6c22efa99394a3677c17c7a7a/runtime/syntax/help.vim
@@ -156,6 +160,7 @@ hl["helpExample"] = { link = "String" }
 hl["helpHyperTextEntry"] = { link = "Directory" }
 hl["helpOption"] = { link = "Normal" }
 hl["helpVim"] = { link = "Normal" }
+
 
 -- Markdown
 -- rules = horizontal bars
@@ -167,34 +172,41 @@ hl["markdownHeadingRule"] = { link = "markdownRule" }
 -- LSP
 --------------------------------------------------
 for type, color in pairs({
-	Error = red2,
-	Warn = ylw0,
-	Info = blue1,
-	Hint = gray5,
-	Ok = grn0
+	Error = base08,
+	Warn = base09,
+	Info = base0E,
+	Hint = base05,
+	Ok = base0A
 }) do
+
 	hl["Diagnostic" .. type] = { fg = color }
 	hl["DiagnosticSign" .. type] = utils.update(hl["Normal"], { fg = color })
 	hl["DiagnosticVirtualText" .. type] = {
 		fg = color,
 		bg = utils.shade_color(color, -80)
 	}
-	hl["DiagnosticUnderline" .. type] = { sp = color, underline = true }
+	hl["DiagnosticUnderline" .. type] = { sp = utils.shade_color(color, -15), underdashed = true }
 end
 
+hl["DiagnosticUnnecessary"] = utils.update(hl["Comment"], { strikethrough = true })
+
 -- Handlers
-hl["LspSignatureActiveParameter"] = { fg = red2 }
+hl["LspSignatureActiveParameter"] = { fg = base08 }
 
 
 --------------------------------------------------
 -- Treesitter
 --------------------------------------------------
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
-hl["@namespace"] = { fg = blue1 }
-hl["@string.regex"] = { fg = grn0 }
+hl["@namespace"] = { fg = base0E }
+hl["@string.regex"] = { fg = base0A }
 hl["@text.emphasis"] = na
 hl["@text.strong"] = na
-hl["@text.uri"] = { fg = blue2 }
+hl["@text.uri"] = { fg = base0F }
+
+hl["@constant.builtin"] = { link = "Constant" }
+hl["@function.call"] = { link = "Normal" }
+hl["@method.call"] = { link = "Normal" }
 hl["@property"] = { link = "@field" }
 hl["@punctuation.special"] = { link = "Normal" }
 hl["@string.documentation"] = { link = "Comment" }
@@ -204,13 +216,24 @@ hl["@text.literal"] = { link = "Normal" }
 
 -- Comment keywords
 for type, color in pairs({
-	danger = red2,
-	warning = ylw0,
-	todo = ylw0,
-	note = blue1,
+	danger = base08,
+	warning = base09,
+	todo = base09,
+	note = base0E,
 }) do
 	hl["@text." .. type] = { fg = color }
 end
+
+
+--------------------------------------------------
+-- Semantic Tokens
+--------------------------------------------------
+--- Hide all semantic highlights
+for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+	vim.api.nvim_set_hl(0, group, {})
+end
+
+
 
 
 vim.g.colors_name = "hl-dungeon"

@@ -1,4 +1,4 @@
-# 🚪 hl-dungeon &ensp; <sub><sup><sub><sup><sub><sup><sub><sup>Give me some peace and quiet</sup></sub></sup></sub></sup></sub></sup></sub>
+# 🚪 hl-dungeon &ensp; <sub><sup><sub><sup><sub><sup><sub><sup>Get away from me</sup></sub></sup></sub></sup></sub></sup></sub>
 
 
 This theme is inspired by the space to think that I don't have.
