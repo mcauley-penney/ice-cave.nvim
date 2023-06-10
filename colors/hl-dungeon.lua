@@ -61,12 +61,10 @@ hl["Visual"] = { bg = base02 }
 hl["Underlined"] = { underline = true }
 
 hl["Conceal"] = { link = "Normal" }
-hl["CursorLine"] = utils.update(hl["Visual"], { fg = base09 })
 hl["CursorLineNr"] = { link = "Normal" }
 hl["Delimiter"] = { link = "Normal" }
 hl["EndOfBuffer"] = { link = "NonText" }
 hl["ErrorMsg"] = { link = "Error" }
-hl["FloatBorder"] = { bg = hl["StatusLine"]["bg"], fg = hl["StatusLine"]["bg"] }
 hl["FoldColumn"] = { link = "Folded" }
 hl["Folded"] = { link = "NonText" }
 hl["IncSearch"] = { link = "Search" }
@@ -85,6 +83,10 @@ hl["VertSplit"] = { link = "NonText" }
 hl["WarningMsg"] = { link = "Error" }
 hl["Whitespace"] = { link = "NonText" }
 hl["WinBar"] = { link = "Normal" }
+
+hl["CursorLine"] = utils.update(hl["Visual"], { fg = base09 })
+hl["NormalFloat"] = { fg = hl["Normal"]["fg"], bg = hl["StatusLine"]["bg"] }
+hl["FloatBorder"] = { bg = hl["NormalFloat"]["bg"], fg = hl["NormalFloat"]["bg"] }
 
 
 --------------------------------------------------
@@ -144,12 +146,11 @@ hl["gitcommitDiscardedType"] = { link = "DiffDelete" }
 hl["gitcommitSummary"] = { link = "Directory" }
 hl["gitcommitUnmerged"] = { link = "DiffAdd" }
 
-
 -- Gitcommit diffs
+-- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
 hl["diffAdded"] = { link = "DiffAdd" }
 hl["diffChanged"] = { link = "DiffChange" }
 hl["diffRemoved"] = { link = "DiffDelete" }
-
 
 -- Help
 -- https://github.com/vim/vim/blob/2d8ed0203aedd5f6c22efa99394a3677c17c7a7a/runtime/syntax/help.vim
@@ -176,14 +177,13 @@ for type, color in pairs({
 	Hint = base05,
 	Ok = base0A
 }) do
-
 	hl["Diagnostic" .. type] = { fg = color }
 	hl["DiagnosticSign" .. type] = utils.update(hl["Normal"], { fg = color })
 	hl["DiagnosticVirtualText" .. type] = {
 		fg = color,
 		bg = utils.shade_color(color, -80)
 	}
-	hl["DiagnosticUnderline" .. type] = { sp = utils.shade_color(color, -15), underdashed = true }
+	hl["DiagnosticUnderline" .. type] = { sp = utils.shade_color(color, -15), underline = true }
 end
 
 hl["DiagnosticUnnecessary"] = utils.update(hl["Comment"], { strikethrough = true })
