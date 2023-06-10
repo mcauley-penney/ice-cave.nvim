@@ -124,12 +124,10 @@ hl["Typedef"] = { link = "Type" }
 -- Filetype
 --------------------------------------------------
 -- diff
--- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
-hl["DiffAdd"] = { bg = utils.shade_color(base0A, -70) }
-hl["DiffChange"] = { bg = utils.shade_color(base0D, -40) }
-hl["DiffDelete"] = { bg = utils.shade_color(base08, -70) }
-hl["DiffText"] = { bg = base0D }
-
+hl["DiffAdd"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(base0A, -70) }
+hl["DiffChange"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(base0D, -40) }
+hl["DiffDelete"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(base08, -70) }
+hl["DiffText"] = { fg = hl["Normal"]["fg"], bg = base0D }
 
 -- Gitcommit (info above the diff in a commit)
 -- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
