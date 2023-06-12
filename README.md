@@ -1,14 +1,21 @@
-# 🚪 hl-dungeon &ensp; <sub><sup><sub><sup><sub><sup><sub><sup>Get away from me</sup></sub></sup></sub></sup></sub></sup></sub>
+# 🏔️ ice-cave.nvim
 
 
-This theme is inspired by the space to think that I don't have.
 
 
+### Installation
+- Lazy.nvim
 ```lua
-{ "mcauley-penney"/"hl-dungeon.nvim" }
+{
+    "mcauley-penney/ice-cave.nvim",
+    config = function()
+        vim.cmd.colorscheme("ice-cave")
+    end,
+    priority = 1000
+}
 ```
 
 
-## Influences
+### Influences
 1. [Alabaster](https://github.com/tonsky/sublime-scheme-alabaster)
 2. [Nord](https://www.nordtheme.com/) and [iceberg.vim](https://github.com/cocopon/iceberg.vim)

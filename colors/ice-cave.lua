@@ -234,7 +234,7 @@ end
 
 
 
-vim.g.colors_name = "hl-dungeon"
+vim.g.colors_name = "ice-cave"
 
 -- call highlight
 set_hl(hl)
