@@ -199,6 +199,7 @@ hl["LspSignatureActiveParameter"] = { fg = base08 }
 hl["@namespace"] = { fg = base0E }
 hl["@string.regex"] = { fg = base0A }
 hl["@text.emphasis"] = na
+hl["@text.quote.markdown"] = { link = "StatusLine" }
 hl["@text.strong"] = na
 hl["@text.uri"] = { fg = base0F }
 
@@ -211,6 +212,8 @@ hl["@string.documentation"] = { link = "Comment" }
 hl["@string.escape"] = { link = "@string.regex" }
 hl["@string.special"] = { link = "@string.regex" }
 hl["@text.literal"] = { link = "Normal" }
+hl["@text.literal.block.markdown"] = { link = "StatusLine" }
+hl["@text.reference"] = { link = "StatusLine" }
 
 -- Comment keywords
 for type, color in pairs({
