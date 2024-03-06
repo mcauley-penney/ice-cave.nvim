@@ -3,36 +3,38 @@
 -- 	hi groups: https://neovim.io/doc/user/syntax.html#highlight-groups
 -- 	bg, also set in terminal cfg: #1c2128
 
+vim.g.colors_name = "ice-cave"
 
-local utils = require("utils")
+local utils       = require("utils")
 
-
-local na     = {}
-local base00 = "#1c2128"
-local base01 = "#25282E"
-local base02 = "#30343C"
-local base03 = "#474D58"
-local base04 = "#606368"
-local base05 = "#cecece"
-local base06 = "#c3a4b3"
-local base07 = "#e26d5c"
-local base08 = "#ff0000"
-local base09 = "#e8a63b"
-local base0A = "#4b8b51"
-local base0B = "#8391A7"
-local base0C = "#b3c3a4"
-local base0D = "#3b4a80"
-local base0E = "#6C94BC"
-local base0F = "#a6b4e7"
+local na          = {}
+local base000     = "#1B1D20"
+local base00      = "#1e2124"
+local base01      = "#25282B"
+local base02      = "#36393e"
+local base03      = "#4b4c54"
+local base04      = "#505B64"
+local l_gray2     = "#686f78"
+local base05      = "#c6cfd1"
+local base06      = "#c3a4b3"
+local base07      = "#e26d5c"
+local base08      = "#ed333b"
+local base09      = "#e8a63b"
+local base0A      = "#4b8b51"
+local base0B      = "#8391A7"
+local base0C      = "#b3c3a4"
+local base0D      = "#566AB1"
+local base0E      = "#6DA2CF"
+local base0F      = "#a6b4e7"
 
 
 -- highlight dictionary
 local hl = {}
 
 local function set_hl(hl_tbl)
-	for group, opts in pairs(hl_tbl) do
-		vim.api.nvim_set_hl(0, group, opts)
-	end
+  for group, opts in pairs(hl_tbl) do
+    vim.api.nvim_set_hl(0, group, opts)
+  end
 end
 
 
@@ -40,54 +42,56 @@ end
 -- UI
 --------------------------------------------------
 hl["ColorColumn"] = na
-hl["Cursor"] = { bg = base08 }
+hl["Cursor"] = { bg = base0D }
 hl["Directory"] = { fg = base0E }
 hl["Error"] = { fg = base08 }
-hl["LineNr"] = { fg = base04 }
+hl["LineNr"] = { link = "NonText" }
 hl["ModeMsg"] = { fg = base0C }
 hl["MsgArea"] = na
 hl["NonText"] = { fg = base03 }
-hl["Normal"] = { fg = base05, bg = base00 }
-hl["PmenuSel"] = { bg = base02 }
+hl["Normal"] = { fg = base05 }
+hl["Pmenu"] = { fg = l_gray2, bg = base01 }
+hl["PmenuSel"] = { link = "Normal" }
 hl["Question"] = { fg = base0C }
-hl["Search"] = { fg = base0E, bg = base02 }
+hl["Search"] = { fg = base00, bg = base09 }
+hl["CurSearch"] = { fg = base00, bg = base07 }
 hl["SpecialComment"] = { fg = base09 }
 hl["SpecialKey"] = { fg = base09 }
-hl["StatusLine"] = { bg = base01 }
-hl["StatusLineNC"] = na
+hl["StatusLineNC"] = { link = "Statusline" }
 hl["Substitute"] = { fg = base08, bg = base02 }
 hl["TabLineFill"] = na
-hl["Visual"] = { bg = base02 }
+hl["Visual"] = { fg = base05, bg = "#2B3237" }
 hl["Underlined"] = { underline = true }
+hl["WinBarNC"] = na
 
 hl["Conceal"] = { link = "Normal" }
-hl["CursorLineNr"] = { link = "Normal" }
+hl["CursorLine"] = { bg = base02 }
+hl["CursorLineNr"] = { bg = "#24292E" }
 hl["Delimiter"] = { link = "Normal" }
 hl["EndOfBuffer"] = { link = "NonText" }
 hl["ErrorMsg"] = { link = "Error" }
-hl["FoldColumn"] = { link = "Folded" }
+hl["FoldColumn"] = { link = "NonText" }
 hl["Folded"] = { link = "NonText" }
 hl["IncSearch"] = { link = "Search" }
-hl["MatchParen"] = { link = "CursorLine" }
 hl["MoreMsg"] = { link = "ModeMsg" }
-hl["Pmenu"] = { link = "StatusLine" }
+hl["MsgSeparator"] = { link = "VertSplit" }
+hl["NormalFloat"] = { fg = base05, bg = base000 }
 hl["PmenuThumb"] = { link = "PmenuSel" }
 hl["PmenuSbar"] = { link = "Pmenu" }
 hl["QuickFixLine"] = { link = "Search" }
 hl["SignColumn"] = { link = "Normal" }
 hl["SpecialChar"] = { link = "Special" }
+hl["StatusLine"] = { fg = base05, bg = "#24292E" }
 hl["TermCursor"] = { link = "NonText" }
 hl["Title"] = { link = "Directory" }
 hl["Todo"] = { link = "SpecialComment" }
-hl["VertSplit"] = { link = "NonText" }
 hl["WarningMsg"] = { link = "Error" }
 hl["Whitespace"] = { link = "NonText" }
 hl["WinBar"] = { link = "Normal" }
+hl["WinSeparator"] = { fg = base01 }
 
-hl["CursorLine"] = utils.update(hl["Visual"], { fg = base09 })
-hl["NormalFloat"] = { fg = hl["Normal"]["fg"], bg = hl["StatusLine"]["bg"] }
-hl["FloatBorder"] = { bg = hl["NormalFloat"]["bg"], fg = hl["NormalFloat"]["bg"] }
-
+hl["MatchParen"] = { fg = base09, bg = hl["Visual"]["bg"] }
+hl["FloatBorder"] = { fg = base02, bg = hl["NormalFloat"]["bg"] }
 
 --------------------------------------------------
 --  Syntax
@@ -160,30 +164,80 @@ hl["helpHyperTextEntry"] = { link = "Directory" }
 hl["helpOption"] = { link = "Normal" }
 hl["helpVim"] = { link = "Normal" }
 
-
 -- Markdown
 -- rules = horizontal bars
-hl["markdownRule"] = { link = "NonText" }
 hl["markdownHeadingRule"] = { link = "markdownRule" }
+hl["markdownRule"] = { link = "NonText" }
+
+--------------------------------------------------
+-- Treesitter
+--------------------------------------------------
+-- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
+hl["@namespace"] = { fg = base0E }
+hl["@punctuation"] = na
+hl["@string.regex"] = { fg = base0A }
+hl["@markup.raw.block"] = { bg = base01 }
+hl["@markup.raw.markdown_inline"] = { link = "@markup.raw.block" }
+hl["@text.uri"] = { fg = base0F, underline = true }
+
+
+hl["@constant.builtin"] = { link = "Constant" }
+hl["@function.call"] = { link = "Normal" }
+hl["@markup.heading"] = { link = "Title" }
+hl["@method.call"] = { link = "Normal" }
+hl["@property.json"] = { link = "String" }
+hl["@string.documentation"] = { link = "Comment" }
+hl["@string.escape"] = { link = "@string.regex" }
+hl["@string.special"] = { link = "@string.regex" }
+hl["@text.literal"] = { link = "Normal" }
+hl["@text.reference"] = { link = "String" }
+
+-- Markdown
+hl["@markup.link.markdown_inline"] = na
+hl["@markup.link.url.markdown_inline"] = { link = "@text.uri" }
+hl["@markup.link.label.markdown_inline"] = { link = "String" }
+hl["@markup.raw.delimiter.markdown"] = { link = "@markup.quote.markdown" }
+hl["@markup.quote.markdown"] = { link = "Comment" }
+
+-- Latex
+hl["@markup.link.latex"] = { link = "Keyword" }
+hl["@markup.environment.latex"] = { link = "@markup.raw.block" }
+hl["@module.latex"] = { link = "Function" }
+hl["@punctuation.special.latex"] = { link = "Function" }
+
+for _, level in pairs({ "1", "2", "3", "4" }) do
+  hl["@markup.heading." .. level .. ".latex"] = { link = "String" }
+end
+
+--  for _, level in pairs({ "1", "2", "3", "4", "5", "6" }) do
+--    hl["@markup.heading." .. level .. ".markdown"] = { fg = base0B }
+--  end
+
+-- Comment keywords
+for type, color in pairs({
+  danger = base08,
+  warning = base09,
+  todo = base09,
+  note = base0E,
+}) do
+  hl["@text." .. type] = { fg = color }
+end
 
 
 --------------------------------------------------
 -- LSP
 --------------------------------------------------
 for type, color in pairs({
-	Error = base08,
-	Warn = base09,
-	Info = base0E,
-	Hint = base05,
-	Ok = base0A
+  Error = base08,
+  Warn = base09,
+  Info = base0E,
+  Hint = base05,
+  Ok = base0A
 }) do
-	hl["Diagnostic" .. type] = { fg = color }
-	hl["DiagnosticSign" .. type] = utils.update(hl["Normal"], { fg = color })
-	hl["DiagnosticVirtualText" .. type] = {
-		fg = color,
-		bg = utils.shade_color(color, -80)
-	}
-	hl["DiagnosticUnderline" .. type] = { sp = utils.shade_color(color, -15), underline = true }
+  hl["Diagnostic" .. type] = { fg = color }
+  hl["DiagnosticSign" .. type] = utils.update(hl["Normal"], { fg = color })
+  hl["DiagnosticVirtualText" .. type] = { fg = color }
+  hl["DiagnosticUnderline" .. type] = { sp = utils.shade_color(color, -15), undercurl = true }
 end
 
 hl["DiagnosticUnnecessary"] = utils.update(hl["Comment"], { strikethrough = true })
@@ -193,51 +247,15 @@ hl["LspSignatureActiveParameter"] = { fg = base08 }
 
 
 --------------------------------------------------
--- Treesitter
---------------------------------------------------
--- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
-hl["@namespace"] = { fg = base0E }
-hl["@string.regex"] = { fg = base0A }
-hl["@text.emphasis"] = na
-hl["@text.quote.markdown"] = { link = "StatusLine" }
-hl["@text.strong"] = na
-hl["@text.uri"] = { fg = base0F }
-
-hl["@constant.builtin"] = { link = "Constant" }
-hl["@function.call"] = { link = "Normal" }
-hl["@method.call"] = { link = "Normal" }
-hl["@property"] = { link = "@field" }
-hl["@punctuation.special"] = { link = "Normal" }
-hl["@string.documentation"] = { link = "Comment" }
-hl["@string.escape"] = { link = "@string.regex" }
-hl["@string.special"] = { link = "@string.regex" }
-hl["@text.literal"] = { link = "Normal" }
-hl["@text.literal.block.markdown"] = { link = "StatusLine" }
-hl["@text.reference"] = { link = "StatusLine" }
-
--- Comment keywords
-for type, color in pairs({
-	danger = base08,
-	warning = base09,
-	todo = base09,
-	note = base0E,
-}) do
-	hl["@text." .. type] = { fg = color }
-end
-
-
---------------------------------------------------
 -- Semantic Tokens
 --------------------------------------------------
 --- Hide all semantic highlights
 for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
-	vim.api.nvim_set_hl(0, group, {})
+  vim.api.nvim_set_hl(0, group, {})
 end
 
 
-
-
-vim.g.colors_name = "ice-cave"
-
+--------------------------------------------------
 -- call highlight
+--------------------------------------------------
 set_hl(hl)
