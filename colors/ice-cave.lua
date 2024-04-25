@@ -1,111 +1,97 @@
--- Author: mp
--- Notes:
--- 	hi groups: https://neovim.io/doc/user/syntax.html#highlight-groups
--- 	bg, also set in terminal cfg: #1c2128
+local utils   = require("utils")
 
-vim.g.colors_name = "ice-cave"
+local hl      = {}
+local gray0   = "#1b1d20"
+local gray1   = "#1e2124"
+local gray2   = "#24292e"
+local gray3   = "#2b3237"
+local gray4   = "#36393e"
+local gray5   = "#40484e"
+local gray6   = "#4c555c"
+local gray7   = "#777d85"
+local gray8   = "#e2e7e8"
+local pink1   = "#c3a4b3"
+local red1    = "#ed333b"
+local red2    = "#e26d5c"
+local yellow1 = "#e8a63b"
+local yellow2 = "#E2B05C"
+local green1  = "#4b8b51"
+local green2  = "#b3c3a4"
+local blue1   = "#566ab1"
+local blue2   = "#8391a7"
+local blue3   = "#a2c4ff"
 
-local utils       = require("utils")
-
-local na          = {}
-local base000     = "#1B1D20"
-local base00      = "#1e2124"
-local base01      = "#24292E"
-local base011     = "#2B3237"
-local base02      = "#36393e"
-local base03      = "#40484E"
-local base04      = "#4C555C"
-local base05      = "#686f78"
-local base06      = "#E2E7E8"
-local base07      = "#c3a4b3"
-local base08      = "#e26d5c"
-local base09      = "#ed333b"
-local base0A      = "#e8a63b"
-local base0B      = "#4b8b51"
-local base0C      = "#8391A7"
-local base0D      = "#b3c3a4"
-local base0E      = "#566AB1"
-local base0F      = "#A2C4FF"
-
-
--- highlight dictionary
-local hl = {}
-
-local function set_hl(hl_tbl)
-  for group, opts in pairs(hl_tbl) do
-    vim.api.nvim_set_hl(0, group, opts)
-  end
-end
-
+vim.g.colors_name    = "ice-cave"
 
 --------------------------------------------------
 -- UI
 --------------------------------------------------
-hl["ColorColumn"] = na
-hl["Conceal"] = { link = "Normal" }
-hl["CurSearch"] = { fg = base00, bg = base08 }
-hl["Cursor"] = { bg = base09 }
-hl["CursorLine"] = { bg = base01 }
-hl["CursorLineNr"] = { link = "Normal" }
-hl["Delimiter"] = { link = "Normal" }
-hl["Directory"] = { fg = base0F }
-hl["EndOfBuffer"] = { link = "NonText" }
-hl["Error"] = { fg = base09 }
-hl["ErrorMsg"] = { link = "Error" }
-hl["FoldColumn"] = { link = "NonText" }
-hl["Folded"] = { link = "NonText" }
-hl["IncSearch"] = { link = "Search" }
-hl["LineNr"] = { link = "NonText" }
-hl["ModeMsg"] = { fg = base07 }
-hl["MoreMsg"] = { link = "ModeMsg" }
-hl["MsgArea"] = na
-hl["MsgSeparator"] = { link = "VertSplit" }
-hl["NonText"] = { fg = base03 }
-hl["Normal"] = { fg = base06, bg = base00 }
-hl["NormalFloat"] = { fg = base06, bg = base000 }
-hl["Pmenu"] = { fg = base05, bg = base01 }
-hl["PmenuSbar"] = { link = "Normal" }
-hl["PmenuSel"] = { fg = base00, bg = base08 }
-hl["PmenuThumb"] = { bg = base011 }
-hl["Question"] = { fg = base0D }
-hl["QuickFixLine"] = { link = "Search" }
-hl["Search"] = { fg = base00, bg = base0A }
-hl["SignColumn"] = { link = "Normal" }
-hl["SpecialChar"] = { link = "Special" }
-hl["SpecialComment"] = { fg = base0A }
-hl["SpecialKey"] = { fg = base0A }
-hl["StatusLine"] = { fg = base06, bg = base01 }
-hl["StatusLineNC"] = na
-hl["Substitute"] = { fg = base09, bg = base02 }
-hl["TabLineFill"] = na
-hl["TermCursor"] = { link = "Cursor" }
-hl["Title"] = { link = "Directory" }
-hl["Todo"] = { link = "SpecialComment" }
-hl["Underlined"] = { underline = true }
-hl["Visual"] = { fg = base06, bg = base011 }
-hl["WarningMsg"] = { link = "Error" }
-hl["Whitespace"] = { link = "NonText" }
-hl["WinBar"] = { link = "Normal" }
-hl["WinBarNC"] = na
+hl["ColorColumn"]    = {}
+hl["Conceal"]        = { link = "Normal" }
+hl["CurSearch"]      = { fg = gray1, bg = red2 }
+hl["Cursor"]         = { bg = red1 }
+hl["CursorLine"]     = { bg = gray2 }
+hl["CursorLineNr"]   = { link = "Normal" }
+hl["Delimiter"]      = { link = "Normal" }
+hl["Directory"]      = { fg = blue3 }
+hl["EndOfBuffer"]    = { link = "NonText" }
+hl["Error"]          = { fg = red1 }
+hl["ErrorMsg"]       = { link = "Error" }
+hl["FoldColumn"]     = { link = "NonText" }
+hl["Folded"]         = { link = "NonText" }
+hl["IncSearch"]      = { link = "Search" }
+hl["LineNr"]         = { link = "NonText" }
+hl["ModeMsg"]        = { fg = pink1 }
+hl["MoreMsg"]        = { link = "ModeMsg" }
+hl["MsgArea"]        = {}
+hl["MsgSeparator"]   = { link = "VertSplit" }
+hl["NonText"]        = { fg = gray5 }
+hl["Normal"]         = { fg = gray8, bg = gray1 }
+hl["NormalFloat"]    = { fg = gray8, bg = gray0 }
+hl["Pmenu"]          = { fg = gray7, bg = gray2 }
+hl["PmenuSbar"]      = { link = "Normal" }
+hl["PmenuSel"]       = { fg = gray1, bg = red2 }
+hl["PmenuThumb"]     = { bg = gray3 }
+hl["Question"]       = { fg = green2 }
+hl["QuickFixLine"]   = { link = "Search" }
+hl["Search"]         = { fg = gray1, bg = yellow2 }
+hl["SignColumn"]     = { link = "Normal" }
+hl["SpecialChar"]    = { link = "Special" }
+hl["SpecialComment"] = { fg = yellow2 }
+hl["SpecialKey"]     = { fg = yellow2 }
+hl["StatusLine"]     = { fg = gray8, bg = gray2 }
+hl["StatusLineNC"]   = {}
+hl["Substitute"]     = { fg = red1, bg = gray4 }
+hl["TabLineFill"]    = {}
+hl["TermCursor"]     = { link = "Cursor" }
+hl["Title"]          = { link = "Directory" }
+hl["Todo"]           = { link = "SpecialComment" }
+hl["Underlined"]     = { underline = true }
+hl["Visual"]         = { fg = gray8, bg = gray3 }
+hl["WarningMsg"]     = { link = "Error" }
+hl["Whitespace"]     = { link = "NonText" }
+hl["WinBar"]         = { link = "Normal" }
+hl["WinBarNC"]       = {}
 
-hl["WinSeparator"] = { fg = hl["NormalFloat"]["bg"] }
-hl["MatchParen"] = { fg = base0A, bg = hl["Visual"]["bg"] }
-hl["FloatBorder"] = { fg = base02, bg = hl["NormalFloat"]["bg"] }
-hl["FloatTitle"] = { fg = base0F, bg = hl["NormalFloat"]["bg"] }
+hl["WinSeparator"]   = { fg = hl["NormalFloat"]["bg"] }
+hl["MatchParen"]     = { fg = yellow2, bg = hl["Visual"]["bg"] }
+hl["FloatBorder"]    = { fg = gray4, bg = hl["NormalFloat"]["bg"] }
+hl["FloatTitle"]     = { fg = blue3, bg = hl["NormalFloat"]["bg"] }
+
 
 --------------------------------------------------
 --  Syntax
 --------------------------------------------------
-hl["Comment"] = { fg = base04 }
-hl["Constant"] = { fg = base07 }
-hl["Function"] = { fg = base0F }
-hl["Keyword"] = { fg = base0C }
-hl["Number"] = { fg = base08 }
-hl["Operator"] = { fg = base0A }
-hl["PreProc"] = na
-hl["Special"] = na
-hl["String"] = { fg = base0D }
-hl["Tag"] = na
+hl["Comment"] = { fg = gray6 }
+hl["Constant"] = { fg = pink1 }
+hl["Function"] = { fg = blue3 }
+hl["Keyword"] = { fg = blue2 }
+hl["Number"] = { fg = red2 }
+hl["Operator"] = { fg = yellow2 }
+hl["PreProc"] = {}
+hl["Special"] = {}
+hl["String"] = { fg = green2 }
+hl["Tag"] = {}
 
 hl["Boolean"] = { link = "Constant" }
 hl["Character"] = { link = "String" }
@@ -130,16 +116,22 @@ hl["Typedef"] = { link = "Type" }
 -- Filetype
 --------------------------------------------------
 -- diff
-hl["DiffAdd"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(base0B, -70) }
-hl["DiffChange"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(base0E, -40) }
-hl["DiffDelete"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(base09, -70) }
-hl["DiffText"] = { fg = hl["Normal"]["fg"], bg = base0E }
+hl["DiffAdd"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(green1, -70) }
+hl["DiffChange"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(blue1, -40) }
+hl["DiffDelete"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(red1, -70) }
+hl["DiffText"] = { fg = hl["Normal"]["fg"], bg = blue1 }
+
+-- Gitcommit diffs
+-- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
+hl["diffAdded"] = { link = "DiffAdd" }
+hl["diffChanged"] = { link = "DiffChange" }
+hl["diffRemoved"] = { link = "DiffDelete" }
 
 -- Gitcommit (info above the diff in a commit)
 -- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
-hl["gitcommitHeader"] = na
-hl["gitcommitOnBranch"] = na
-hl["gitcommitType"] = { fg = base07 }
+hl["gitcommitHeader"] = {}
+hl["gitcommitOnBranch"] = {}
+hl["gitcommitType"] = { fg = pink1 }
 
 hl["gitcommitArrow"] = { link = "Statement" }
 hl["gitcommitBlank"] = { link = "DiffAdd" }
@@ -149,12 +141,6 @@ hl["gitcommitDiscardedFile"] = { link = "DiffAdd" }
 hl["gitcommitDiscardedType"] = { link = "DiffDelete" }
 hl["gitcommitSummary"] = { link = "Directory" }
 hl["gitcommitUnmerged"] = { link = "DiffAdd" }
-
--- Gitcommit diffs
--- https://github.com/vim/vim/blob/c54f347d63bcca97ead673d01ac6b59914bb04e5/runtime/syntax/diff.vim
-hl["diffAdded"] = { link = "DiffAdd" }
-hl["diffChanged"] = { link = "DiffChange" }
-hl["diffRemoved"] = { link = "DiffDelete" }
 
 -- Help
 -- https://github.com/vim/vim/blob/2d8ed0203aedd5f6c22efa99394a3677c17c7a7a/runtime/syntax/help.vim
@@ -173,12 +159,12 @@ hl["markdownRule"] = { link = "NonText" }
 -- Treesitter
 --------------------------------------------------
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
-hl["@namespace"] = { fg = base0F }
-hl["@punctuation"] = na
-hl["@string.regex"] = { fg = base0B }
-hl["@markup.raw.block"] = { bg = base01 }
+hl["@namespace"] = { fg = blue3 }
+hl["@punctuation"] = {}
+hl["@string.regex"] = { fg = green1 }
+hl["@markup.raw.block"] = { bg = gray2 }
 hl["@markup.raw.markdown_inline"] = { link = "@markup.raw.block" }
-hl["@text.uri"] = { fg = base0C, underline = true }
+hl["@text.uri"] = { fg = blue2, underline = true }
 
 hl["@constant.builtin"] = { link = "Constant" }
 hl["@function.call"] = { link = "Normal" }
@@ -192,7 +178,7 @@ hl["@text.literal"] = { link = "Normal" }
 hl["@text.reference"] = { link = "String" }
 
 -- Markdown
-hl["@markup.link.markdown_inline"] = na
+hl["@markup.link.markdown_inline"] = {}
 hl["@markup.link.url.markdown_inline"] = { link = "@text.uri" }
 hl["@markup.link.label.markdown_inline"] = { link = "String" }
 hl["@markup.raw.delimiter.markdown"] = { link = "@markup.quote.markdown" }
@@ -210,11 +196,11 @@ end
 
 -- Comment keywords
 for type, color in pairs({
-  error =  { fg = base09, bold = true },
-  danger = { fg = base09, bold = true },
-  warning = { fg = base0A, bold = true },
-  todo = { fg = base0F, bold = true },
-  note = { fg = base06, bold = true },
+  error = { fg = red1, bold = true },
+  danger = { fg = red1, bold = true },
+  warning = { fg = yellow1, bold = true },
+  todo = { fg = blue3, bold = true },
+  note = { fg = gray8, bold = true },
 }) do
   hl["@comment." .. type] = color
   hl["@comment." .. type .. ".comment"] = color
@@ -224,12 +210,13 @@ end
 --------------------------------------------------
 -- LSP
 --------------------------------------------------
+-- Diagnostics
 for type, color in pairs({
-  Error = base09,
-  Warn = base0A,
-  Info = base0F,
-  Hint = base06,
-  Ok = base0B
+  Error = red1,
+  Warn = yellow1,
+  Info = blue3,
+  Hint = gray8,
+  Ok = green1
 }) do
   hl["Diagnostic" .. type] = { fg = color }
   hl["DiagnosticSign" .. type] = utils.update(hl["Normal"], { fg = color })
@@ -237,22 +224,22 @@ for type, color in pairs({
   hl["DiagnosticUnderline" .. type] = { sp = utils.shade_color(color, -15), undercurl = true }
 end
 
-hl["DiagnosticUnnecessary"] = utils.update(hl["Comment"], { strikethrough = true })
+hl["DiagnosticUnnecessary"] = utils.update(hl["Comment"], { undercurl = true })
+
 
 -- Handlers
-hl["LspSignatureActiveParameter"] = { fg = base09 }
+hl["LspSignatureActiveParameter"] = { underline = true, sp = gray8}
 
 
---------------------------------------------------
 -- Semantic Tokens
---------------------------------------------------
---- Hide all semantic highlights
 for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
   vim.api.nvim_set_hl(0, group, {})
 end
 
 
 --------------------------------------------------
--- call highlight
+-- Execute
 --------------------------------------------------
-set_hl(hl)
+for group, opts in pairs(hl) do
+  vim.api.nvim_set_hl(0, group, opts)
+end
