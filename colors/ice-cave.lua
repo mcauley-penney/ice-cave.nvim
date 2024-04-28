@@ -1,25 +1,26 @@
-local utils   = require("utils")
+local utils          = require("utils")
 
-local hl      = {}
-local gray0   = "#1b1d20"
-local gray1   = "#1e2124"
-local gray2   = "#24292e"
-local gray3   = "#2b3237"
-local gray4   = "#36393e"
-local gray5   = "#40484e"
-local gray6   = "#4c555c"
-local gray7   = "#777d85"
-local gray8   = "#e2e7e8"
-local pink1   = "#c3a4b3"
-local red1    = "#ed333b"
-local red2    = "#e26d5c"
-local yellow1 = "#e8a63b"
-local yellow2 = "#E2B05C"
-local green1  = "#4b8b51"
-local green2  = "#b3c3a4"
-local blue1   = "#566ab1"
-local blue2   = "#8391a7"
-local blue3   = "#a2c4ff"
+local hl             = {}
+local gray0          = "#1b1d20"
+local gray1          = "#1e2124"
+local gray2          = "#24292e"
+local gray3          = "#2b3237"
+local gray4          = "#36393e"
+local gray5          = "#40484e"
+local gray6          = "#4c555c"
+local gray7          = "#777d85"
+local gray8          = "#D4DBDD"
+local gray9          = "#e2e7e8"
+local red1           = "#c3a4b3"
+local red2           = "#e26d5c"
+local red3           = "#ed333b"
+local yellow1        = "#e8a63b"
+local yellow2        = "#E2B05C"
+local green1         = "#4b8b51"
+local green2         = "#b3c3a4"
+local blue1          = "#566ab1"
+local blue2          = "#8391a7"
+local blue3          = "#a2c4ff"
 
 vim.g.colors_name    = "ice-cave"
 
@@ -29,24 +30,24 @@ vim.g.colors_name    = "ice-cave"
 hl["ColorColumn"]    = {}
 hl["Conceal"]        = { link = "Normal" }
 hl["CurSearch"]      = { fg = gray1, bg = red2 }
-hl["Cursor"]         = { bg = red1 }
+hl["Cursor"]         = { bg = red3 }
 hl["CursorLine"]     = { bg = gray2 }
 hl["CursorLineNr"]   = { link = "Normal" }
 hl["Delimiter"]      = { link = "Normal" }
 hl["Directory"]      = { fg = blue3 }
 hl["EndOfBuffer"]    = { link = "NonText" }
-hl["Error"]          = { fg = red1 }
+hl["Error"]          = { fg = red3 }
 hl["ErrorMsg"]       = { link = "Error" }
 hl["FoldColumn"]     = { link = "NonText" }
 hl["Folded"]         = { link = "NonText" }
 hl["IncSearch"]      = { link = "Search" }
 hl["LineNr"]         = { link = "NonText" }
-hl["ModeMsg"]        = { fg = pink1 }
+hl["ModeMsg"]        = { fg = red1 }
 hl["MoreMsg"]        = { link = "ModeMsg" }
 hl["MsgArea"]        = {}
 hl["MsgSeparator"]   = { link = "VertSplit" }
 hl["NonText"]        = { fg = gray5 }
-hl["Normal"]         = { fg = gray8, bg = gray1 }
+hl["Normal"]         = { fg = gray9, bg = gray1 }
 hl["NormalFloat"]    = { fg = gray8, bg = gray0 }
 hl["Pmenu"]          = { fg = gray7, bg = gray2 }
 hl["PmenuSbar"]      = { link = "Normal" }
@@ -59,15 +60,15 @@ hl["SignColumn"]     = { link = "Normal" }
 hl["SpecialChar"]    = { link = "Special" }
 hl["SpecialComment"] = { fg = yellow2 }
 hl["SpecialKey"]     = { fg = yellow2 }
-hl["StatusLine"]     = { fg = gray8, bg = gray2 }
+hl["StatusLine"]     = { fg = gray9, bg = gray2 }
 hl["StatusLineNC"]   = {}
-hl["Substitute"]     = { fg = red1, bg = gray4 }
+hl["Substitute"]     = { fg = red3, bg = gray4 }
 hl["TabLineFill"]    = {}
 hl["TermCursor"]     = { link = "Cursor" }
 hl["Title"]          = { link = "Directory" }
 hl["Todo"]           = { link = "SpecialComment" }
 hl["Underlined"]     = { underline = true }
-hl["Visual"]         = { fg = gray8, bg = gray3 }
+hl["Visual"]         = { fg = gray9, bg = gray3 }
 hl["WarningMsg"]     = { link = "Error" }
 hl["Whitespace"]     = { link = "NonText" }
 hl["WinBar"]         = { link = "Normal" }
@@ -83,7 +84,7 @@ hl["FloatTitle"]     = { fg = blue3, bg = hl["NormalFloat"]["bg"] }
 --  Syntax
 --------------------------------------------------
 hl["Comment"] = { fg = gray6 }
-hl["Constant"] = { fg = pink1 }
+hl["Constant"] = { fg = red1 }
 hl["Function"] = { fg = blue3 }
 hl["Keyword"] = { fg = blue2 }
 hl["Number"] = { fg = red2 }
@@ -116,9 +117,9 @@ hl["Typedef"] = { link = "Type" }
 -- Filetype
 --------------------------------------------------
 -- diff
-hl["DiffAdd"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(green1, -70) }
-hl["DiffChange"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(blue1, -40) }
-hl["DiffDelete"] = { fg = hl["Normal"]["fg"], bg = utils.shade_color(red1, -70) }
+hl["DiffAdd"] = { fg = hl["Normal"]["fg"], bg = utils.tint(green1, -70) }
+hl["DiffChange"] = { fg = hl["Normal"]["fg"], bg = utils.tint(blue1, -40) }
+hl["DiffDelete"] = { fg = hl["Normal"]["fg"], bg = utils.tint(red3, -70) }
 hl["DiffText"] = { fg = hl["Normal"]["fg"], bg = blue1 }
 
 -- Gitcommit diffs
@@ -131,7 +132,7 @@ hl["diffRemoved"] = { link = "DiffDelete" }
 -- https://github.com/vim/vim/blob/2f0936cb9a2eb026acac03e6a8fd0b2a5d97508b/runtime/syntax/gitcommit.vim
 hl["gitcommitHeader"] = {}
 hl["gitcommitOnBranch"] = {}
-hl["gitcommitType"] = { fg = pink1 }
+hl["gitcommitType"] = { fg = red1 }
 
 hl["gitcommitArrow"] = { link = "Statement" }
 hl["gitcommitBlank"] = { link = "DiffAdd" }
@@ -154,6 +155,15 @@ hl["helpVim"] = { link = "Normal" }
 -- rules = horizontal bars
 hl["markdownHeadingRule"] = { link = "markdownRule" }
 hl["markdownRule"] = { link = "NonText" }
+hl["markdownListMarker"] = { link = "Normal" }
+
+local percent = 0
+for level = 1, 6 do
+  local heading = "markdownH" .. level
+  hl[heading] = { fg = utils.tint(blue3, percent) }
+  hl[heading .. "Delimiter"] = { link = heading }
+  percent = percent - 10
+end
 
 --------------------------------------------------
 -- Treesitter
@@ -184,23 +194,25 @@ hl["@markup.link.label.markdown_inline"] = { link = "String" }
 hl["@markup.raw.delimiter.markdown"] = { link = "@markup.quote.markdown" }
 hl["@markup.quote.markdown"] = { link = "Comment" }
 
+
+
 -- Latex
 hl["@markup.link.latex"] = { link = "Keyword" }
 hl["@markup.environment.latex"] = { link = "@markup.raw.block" }
 hl["@module.latex"] = { link = "Function" }
 hl["@punctuation.special.latex"] = { link = "Function" }
 
-for _, level in pairs({ "1", "2", "3", "4" }) do
+for level = 1, 4 do
   hl["@markup.heading." .. level .. ".latex"] = { link = "String" }
 end
 
 -- Comment keywords
 for type, color in pairs({
-  error = { fg = red1, bold = true },
-  danger = { fg = red1, bold = true },
+  error = { fg = red3, bold = true },
+  danger = { fg = red3, bold = true },
   warning = { fg = yellow1, bold = true },
   todo = { fg = blue3, bold = true },
-  note = { fg = gray8, bold = true },
+  note = { fg = gray9, bold = true },
 }) do
   hl["@comment." .. type] = color
   hl["@comment." .. type .. ".comment"] = color
@@ -212,23 +224,23 @@ end
 --------------------------------------------------
 -- Diagnostics
 for type, color in pairs({
-  Error = red1,
+  Error = red3,
   Warn = yellow1,
   Info = blue3,
-  Hint = gray8,
+  Hint = gray9,
   Ok = green1
 }) do
   hl["Diagnostic" .. type] = { fg = color }
   hl["DiagnosticSign" .. type] = utils.update(hl["Normal"], { fg = color })
   hl["DiagnosticVirtualText" .. type] = { fg = color }
-  hl["DiagnosticUnderline" .. type] = { sp = utils.shade_color(color, -15), undercurl = true }
+  hl["DiagnosticUnderline" .. type] = { sp = utils.tint(color, -15), undercurl = true }
 end
 
 hl["DiagnosticUnnecessary"] = utils.update(hl["Comment"], { undercurl = true })
 
 
 -- Handlers
-hl["LspSignatureActiveParameter"] = { underline = true, sp = gray8}
+hl["LspSignatureActiveParameter"] = { sp = gray8, underline = true }
 
 
 -- Semantic Tokens

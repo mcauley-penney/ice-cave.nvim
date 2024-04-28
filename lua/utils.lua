@@ -9,11 +9,10 @@ local M = {}
 ---@return number
 ---@return number
 local function to_rgb(color)
-	return tonumber(color:sub(2, 3), 16),
-			tonumber(color:sub(4, 5), 16),
-			tonumber(color:sub(6), 16)
+  return tonumber(color:sub(2, 3), 16),
+      tonumber(color:sub(4, 5), 16),
+      tonumber(color:sub(6), 16)
 end
-
 
 -- Stolen from toggleterm.nvim
 --
@@ -23,23 +22,23 @@ end
 --- @param color string hex color
 --- @param percent number
 --- @return string
-function M.shade_color(color, percent)
-	local r, g, b = to_rgb(color)
+function M.tint(color, percent)
+  local r, g, b = to_rgb(color)
 
-	-- If any of the colors are missing return "NONE" i.e. no highlight
-	if not r or not g or not b then return "NONE" end
+  -- If any of the colors are missing return "NONE" i.e. no highlight
+  if not r or not g or not b then return "NONE" end
 
-	r = math.floor(tonumber(r * (100 + percent) / 100) or 0)
-	g = math.floor(tonumber(g * (100 + percent) / 100) or 0)
-	b = math.floor(tonumber(b * (100 + percent) / 100) or 0)
-	r, g, b = r < 255 and r or 255, g < 255 and g or 255, b < 255 and b or 255
+  r = math.floor(tonumber(r * (100 + percent) / 100) or 0)
+  g = math.floor(tonumber(g * (100 + percent) / 100) or 0)
+  b = math.floor(tonumber(b * (100 + percent) / 100) or 0)
+  r, g, b = r < 255 and r or 255, g < 255 and g or 255, b < 255 and b or 255
 
-	return "#" .. string.format("%02x%02x%02x", r, g, b)
+  return "#" .. string.format("%02x%02x%02x", r, g, b)
 end
-
 
 function M.update(hl_tbl, opts)
-	return vim.tbl_deep_extend("force", hl_tbl, opts)
+  return vim.tbl_deep_extend("force", hl_tbl, opts)
 end
+
 
 return M
