@@ -175,7 +175,7 @@ end
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
 hl["@namespace"] = { fg = blue3 }
 hl["@number.comment"] = { link = "Comment" }
-hl["@punctuation"] = {}
+hl["@punctuation"] = { link = "Normal" }
 hl["@string.regex"] = { fg = green1 }
 hl["@markup.raw.block"] = { bg = gray2 }
 hl["@markup.raw.markdown_inline"] = { link = "@markup.raw.block" }
